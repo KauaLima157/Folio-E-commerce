@@ -12,11 +12,30 @@ Este projeto tem fins educacionais (MVP) focando na aplicação de Programação
 - **IA:** Integração com modelo Google Gemini para chatbot contextualizado
 - **Deploy planejado:** Vercel (Frontend) e Render (Backend)
 
-## 📁 Estrutura do Repositório
+## 📁 Estrutura do Repositório (Arquitetura Orientada a Objetos)
 
-- `/frontend` - Interface do usuário e lógica client-side (SPA).
-- `/backend` - API RESTful (Node.js), controladores e serviços de negócio.
-- `/docs` - Documentações de arquitetura, design de sistema e referências.
+A arquitetura do projeto foi desenhada visando princípios de Programação Orientada a Objetos (SOLID e Injeção de Dependências), separando claramente as responsabilidades de cada camada.
+
+### ⚙️ `/backend` (API REST)
+- **`src/entities/`**: Classes puras de domínio que agrupam propriedades e estado (ex: `User`, `Product`).
+- **`src/interfaces/`**: Contratos (interfaces) impostos aos repositórios e serviços.
+- **`src/repositories/`**: Responsáveis pela camada de persistência e comunicação indireta com as instâncias do banco.
+- **`src/services/`**: Guardam os casos de uso, lógica de negócio e integrações internas do sistema.
+- **`src/controllers/`**: Recebem requisições HTTP dos clientes e disparam execuções dos serviços.
+- **`src/infrastructure/`**: Centraliza os adapters externos (Conexão ao BD, API de IA, serviços terceiros).
+- **`src/routes/`**: Fazem o roteamento dos endpoints da API para o respectivo Controller.
+- **`src/middlewares/`**: Validações globais ou verificação de tokens (interceptadores).
+
+### 🎨 `/frontend` (React SPA)
+- **`src/domain/entities/`**: Classes locais focadas na representação e modelagem dos objetos da visão do usuário.
+- **`src/domain/interfaces/`**: Contratos TypeScript de DTOs e formatos devidos da API.
+- **`src/services/`**: Classes que englobam a comunicação externa (API requests).
+- **`src/store/`**: Gerenciamento global local (States/Contexts).
+- **`src/components/`**: Componentes da interface limpos e isolados da parte lógica severa.
+- **`src/pages/`**: Reunião de componentes que figuram como telas acessíveis por rota.
+
+### 📚 `/docs`
+- Documentação primária do sistema, detalhamentos de fluxo, roadmap e diagramas de design.
 
 ## 🌿 Estrutura de Branches
 
