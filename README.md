@@ -32,10 +32,4 @@ O assistente virtual integrado é encarregado de:
 - Manter histórico das interações e conversar de modo contínuo em uma sessão.
 - **Nota técnica:** O bot processa mensagens mantendo os dados da sessão utilizando um identificador unificado e um fluxo dinâmico de preenchimento de prompt em background antes da chamada à API (LLM + ferramentas).
 
-## 🛠️ Como executar localmente
 
-*(Em breve - As instruções de instalação e scripts de execução de banco e API serão disponibilizadas conforme o desenvolvimento das camadas avancem)*
-
----
-
-*Refira-se ao arquivo [System Design Document](docs/system-design-ecommerce-chatbot.md) na pasta `/docs` para visualizar a documentação técnica completa deste MVP.*
