@@ -8,8 +8,8 @@ Este projeto tem fins educacionais (MVP) focando na aplicação de Programação
 
 - **Frontend:** React (SPA)
 - **Backend:** Node.js (API REST)
-- **Banco de Dados:** PostgreSQL (Supabase)
-- **IA:** Integração com modelo Google Gemini para chatbot contextualizado
+- **Banco de Dados:** PostgreSQL
+- **IA:** Integração com modelo Google Gemini para chatbot
 - **Deploy planejado:** Vercel (Frontend) e Render (Backend)
 
 ## Estrutura do Repositório
