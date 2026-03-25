@@ -34,6 +34,7 @@ Este projeto tem fins educacionais (MVP) focando na aplicação de Programação
 
 ### `/docs`
 - Documentação primária do sistema, detalhamentos de fluxo, roadmap e diagramas de design.
+- **[Design System](file:///home/kaua/programations/Chatbot/docs/DESIGN_SYSTEM.md)**: Definição de cores, tipografia e variáveis CSS extraídas do Figma.
 
 ## Estrutura de Branches
 
