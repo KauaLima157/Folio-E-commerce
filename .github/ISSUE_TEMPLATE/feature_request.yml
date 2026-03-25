@@ -1,0 +1,28 @@
+---
+name: Feature Request
+description: Propose a new idea for this project
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Tem uma ideia incrível para o E-commerce ou para o Chatbot? Conte-nos mais!
+  - type: textarea
+    id: solution
+    attributes:
+      label: Descrição da Funcionalidade
+      description: O que você gostaria que o sistema fizesse?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto / Problema
+      description: Por que essa funcionalidade é necessária ou qual problema ela resolve?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas Consideradas
+      description: Alguma outra forma de resolver isso que você pensou?

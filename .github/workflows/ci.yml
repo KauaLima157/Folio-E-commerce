@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    # Initially, we just check if the files are accessible.
+    # When package.json is added, we can add:
+    # - name: Install dependencies
+    #   run: npm install
+    # - name: Lint
+    #   run: npm run lint
+    - name: Check Project Structure
+      run: |
+        ls -R
