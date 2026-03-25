@@ -1,0 +1,40 @@
+---
+name: Bug Report
+description: Create a report to help us improve the system
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por relatar um problema! Por favor, preencha as informações abaixo.
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição do Bug
+      description: Uma descrição clara e concisa do que é o bug.
+      placeholder: ex. O chatbot não responde a perguntas sobre o carrinho.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Passos para Reproduzir
+      description: Como podemos ver o problema acontecendo?
+      placeholder: |
+        1. Vá para '...'
+        2. Clique em '....'
+        3. Veja o erro
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento Esperado
+      description: O que você esperava que acontecesse?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs ou Prints
+      description: Se aplicável, adicione logs do console ou prints de tela.
