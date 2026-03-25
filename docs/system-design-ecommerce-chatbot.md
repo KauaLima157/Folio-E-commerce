@@ -388,225 +388,7 @@ talvez, não é uma prioridade no momento
 
 ---
 
-## 12. Design do Sistema Visual
-
-> O design visual define **como o sistema é percebido e usado**. Um bom design system garante consistência e escalabilidade na interface.
-
----
-
-### 12.1 Identidade Visual
-
-A identidade adotada será a da **"Biblioteca Universitária"**, transmitindo um ar de organização, segurança e inteligência. Utilizaremos tons profundos de azul e notas quentes de terracota.
-
-| Elemento | Decisão a tomar |
-|----------|----------------|
-| **Paleta de cores** | Primária: Azul Marinho. Secundária: Terracota (botões de ação/comprar). Fundo: Frio (Cinza super claro). |
-| **Tipografia** | Fonte de títulos e leitura de página: `Lora` (Serifa limpa e clássica). Fonte de IA e interface (chat, botões): `Roboto` ou `Open Sans` (Sem Serifa). |
-| **Espaçamento** | Grid base de 8px (margins e paddings bem arejados). |
-| **Bordas e raios** | Moderado (arredondamento sutil de 4px a 8px). |
-| **Sombras** | Sombras sutis, apenas para evidenciar o widget de chat e modais. |
-| **Iconografia** | Preferência para opções sólidas/outline claras (ex: Lucide React). |
-
-#### Tokens de design (Biblioteca Universitária):
-
-```css
-/* Cores */
---color-primary: #2B4C7E;         /* Azul marinho profundo, passa foco e segurança */
---color-primary-hover: #1D3A63;
---color-secondary: #CD7B4C;       /* Terracota, destaque para botões de conversão e notificações */
---color-secondary-hover: #BA6637;
---color-background: #FAFAFA;      /* Fundo da aplicação */
---color-surface: #FFFFFF;         /* Fundo de cards de livros e modais */
---color-text: #1F2937;            /* Cinza Escuro, melhor que preto puro para leitura */
---color-text-muted: #6B7280;
---color-error: #EF4444;
---color-success: #22C55E;
-
-/* Tipografia */
---font-heading: 'Lora', serif;          /* Títulos de módulos e páginas */
---font-base: 'Roboto', sans-serif;      /* Textos da UI geral e do chatbot */
---text-sm: 0.875rem;
---text-md: 1rem;
---text-lg: 1.25rem;
---text-xl: 1.5rem;
-
-/* Espaçamento */
---space-1: 4px;
---space-2: 8px;
---space-3: 12px;
---space-4: 16px;
---space-6: 24px;
---space-8: 32px;
-```
-
----
-
-### 12.2 Componentes da Interface
-
-Mapeie os componentes visuais que o sistema precisa:
-
-#### Componentes Globais
-
-| Componente | Descrição |
-|-----------|-----------|
-| `Navbar` | Navegação principal com logo, links, busca rápida e ícone do carrinho |
-| `Footer` | Links institucionais, redes sociais |
-| `Button` | Variantes: primary, secondary, ghost, danger |
-| `Input` | Campos de texto, busca, senhas, com estados de erro e foco |
-| `Badge` | Contagem no carrinho, status do pedido (PAGO, ENVIADO, etc.) |
-| `Toast / Notification` | Feedback de ações (produto adicionado, erro, login com sucesso, etc.) |
-| `Modal` | Confirmação de ações, detalhes expandidos, modais de login/registro |
-| `Loader / Spinner / Skeleton` | Estados de carregamento de produtos, telas e respostas do chatbot |
-| `Pagination` | Controle de paginação para listas longas (histórico ou catálogo) |
-
-#### Componentes de Autenticação e Usuário
-
-| Componente | Descrição |
-|-----------|-----------|
-| `LoginForm` | Formulário de login (email, senha) |
-| `RegisterForm` | Formulário de cadastro com dados do usuário e telefone |
-| `AddressFormModal` | Modal ou formulário para adicionar/editar múltiplos endereços de entrega |
-| `OrderHistoryCard` | Card mostrando o resumo de um pedido passado (status, data, valor) |
-
-#### Componentes de Catálogo
-
-| Componente | Descrição |
-|-----------|-----------|
-| `ProductCard` | Imagem, título, autores, preço, e botão de adicionar ao carrinho |
-| `ProductGrid` | Grid responsivo organizando os `ProductCard` |
-| `ProductDetail` | Página completa do produto com descrição longa, gêneros e painel de compra |
-| `FilterSidebar` | Filtros por categoria/gêneros, preço e disponibilidade |
-| `SearchBar` | Campo de busca dedicado com autocomplete/sugestões na Navbar |
-
-#### Componentes do Carrinho e Checkout
-
-| Componente | Descrição |
-|-----------|-----------|
-| `CartDrawer` | Painel lateral deslizante com itens do carrinho (do LocalStorage) |
-| `CartItem` | Produto no carrinho com controle de quantidade (+/-) e botão de remoção |
-| `OrderSummary` | Call-out mostrando o subtotal, frete estimado e total geral do pedido |
-| `CheckoutSteps` | Indicador visual de progresso (Carrinho -> Endereço -> Pagamento) |
-| `AddressSelector` | Radio buttons ou cards para escolher qual endereço salvo usar na compra |
-
-#### Componentes do Chatbot
-
-| Componente | Descrição |
-|-----------|-----------|
-| `ChatWidget` | Widget flutuante no canto inferior direito (botão de abrir/fechar) |
-| `ChatWindow` | Janela de conversa com scroll e histórico da sessão |
-| `ChatMessage` | Balão de mensagem diferenciado (usuário vs assistente), com timestamp |
-| `ChatInput` | Campo de digitação com botão de enviar (desabilita enquanto bot digita) |
-| `QuickReplies` | Pílulas (chips) de sugestões de perguntas clicáveis |
-| `ProductCardInline` | Card ultra-compacto de produto, renderizado diretamente *dentro* do balão do bot quando há um `recommended_product_id` |
-| `TypingIndicator` | Animação sutil de "..." indicando que a IA está respondendo |
-
----
-
-### 12.3 Layout e Estrutura de Páginas
-
-Defina o layout de cada tela principal:
-
-#### Página Inicial (Home)
-```
-┌────────────────────────────────────┐
-│            NAVBAR                  │
-├────────────────────────────────────┤
-│         HERO / BANNER              │
-├────────────────────────────────────┤
-│   PRODUTOS EM DESTAQUE (grid)      │
-├────────────────────────────────────┤
-│            FOOTER                  │
-└────────────────────────────────────┘
-                         ╔═══════════╗
-                         ║ CHATWIDGET║  ← flutuante
-                         ╚═══════════╝
-```
-
-#### Página de Catálogo
-```
-┌────────────────────────────────────┐
-│            NAVBAR + SEARCH         │
-├──────────┬─────────────────────────┤
-│ FILTROS  │   PRODUCT GRID          │
-│          │   [Card][Card][Card]    │
-│          │   [Card][Card][Card]    │
-│          │   [Card][Card][Card]    │
-├──────────┴─────────────────────────┤
-│            PAGINATION              │
-└────────────────────────────────────┘
-```
-
-#### Janela do Chatbot
-```
-┌──────────────────────┐
-│  🤖 Assistente       │  ← Header com nome e status
-├──────────────────────┤
-│  [Mensagem bot]      │
-│         [Msg usuário]│
-│  [Mensagem bot]      │
-│  ┌────────────────┐  │
-│  │ 🛍 Produto X   │  │  ← Card inline
-│  │ R$ 99,90 [+]  │  │
-│  └────────────────┘  │
-│  [Sugestão rápida 1] │
-│  [Sugestão rápida 2] │
-├──────────────────────┤
-│  Digite sua mensagem │  ← Input + Enviar
-└──────────────────────┘
-```
-
----
-
-### 12.4 Responsividade
-
-| Breakpoint | Largura | Comportamento |
-|-----------|---------|--------------|
-| Mobile | `< 640px` | 1 coluna no grid, navbar colapsada, chatbot em tela cheia |
-| Tablet | `640px – 1024px` | 2 colunas, filtros em modal |
-| Desktop | `> 1024px` | 3–4 colunas, filtros na sidebar, chatbot flutuante |
-
----
-
-### 12.5 Hierarquia Visual e UX Writing
-
-| Princípio | Aplicação no sistema |
-|----------|---------------------|
-| **Hierarquia de títulos** | `H1` para nome da página, `H2` para seções, `H3` para nome do produto |
-| **Contraste suficiente** | Mínimo WCAG AA (4.5:1 para texto, 3:1 para UI) |
-| **Feedback imediato** | Toast ao adicionar produto, loader ao enviar mensagem |
-| **Microcopy** | Labels claros nos botões: *"Adicionar ao carrinho"* > *"Comprar"* |
-| **Estados vazios** | Mensagem amigável quando o carrinho está vazio ou busca sem resultado |
-| **Estados de erro** | Mensagem de erro visível e orientada à ação: *"Tente novamente"* |
-
----
-
-### 12.6 Acessibilidade (a11y)
-
-| # | Ponto de atenção |
-|---|-----------------|
-| 1 | Todos os botões têm `aria-label` descritivo? |
-| 2 | O chatbot é navegável por teclado? |
-| 3 | As cores respeitam contraste mínimo WCAG? |
-| 4 | Imagens de produtos têm `alt` descritivo? |
-| 5 | Modais prendem o foco corretamente? *(focus trap)* |
-| 6 | O sistema funciona sem JavaScript para conteúdo estático? |
-
----
-
-### 12.7 Ferramentas Recomendadas para Design
-
-| Etapa | Ferramenta |
-|-------|-----------|
-| Wireframe e protótipo | Figma, Excalidraw |
-| Design system / tokens | Figma + Storybook |
-| Componentes React | Tailwind CSS + shadcn/ui ou Radix UI |
-| Ícones | Lucide React, Heroicons |
-| Fontes | Google Fonts (Inter, Poppins, etc.) |
-| Teste de acessibilidade | axe DevTools, Lighthouse |
-
----
-
-## 13. Experiência do Usuário (UX)
+## 12. Experiência do Usuário (UX)
 
 | # | Pergunta |
 |---|----------|
@@ -617,7 +399,7 @@ Defina o layout de cada tela principal:
 
 ---
 
-## 14. Limitações do Sistema
+## 13. Limitações do Sistema
 
 | # | Pergunta |
 |---|----------|
@@ -630,7 +412,7 @@ Não
 sim, porém ele deve apenas sugerir que o usuário entre em contato com o suporte humano em casos muito específicos
 ---
 
-## 15. Deploy e Infraestrutura
+## 14. Deploy e Infraestrutura
 
 | # | Pergunta |
 |---|----------|
@@ -647,7 +429,7 @@ Sim, os deploys serão automáticos a cada push na branch principal (integraçã
 
 ---
 
-## 16. Evolução Futura
+## 15. Evolução Futura
 
 > Mesmo sendo MVP, pense no futuro.
 
@@ -677,15 +459,9 @@ Após responder todas as perguntas acima, seu documento de design estará estrut
 6. Modelagem de dados
 7. Integração com IA
 8. Fluxo do chatbot
-9. Design do sistema visual
-   ├── Identidade visual (tokens)
-   ├── Componentes
-   ├── Layout de páginas
-   ├── Responsividade
-   └── Acessibilidade
-10. Segurança
-11. Infraestrutura
-12. Evoluções futuras
+9. Segurança
+10. Infraestrutura
+11. Evoluções futuras
 ```
 
 
