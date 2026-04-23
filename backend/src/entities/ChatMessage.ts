@@ -1,6 +1,6 @@
 export enum ChatRole {
-  USER = 'USER',
-  ASSISTANT = 'ASSISTANT'
+  USER = 'user',
+  ASSISTANT = 'assistant'
 }
 
 export class ChatMessage {

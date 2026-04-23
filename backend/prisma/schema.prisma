@@ -108,6 +108,7 @@ model CartItem {
   product    Product  @relation(fields: [product_id], references: [id])
 
   @@map("cart_items")
+  @@unique([user_id, product_id])
 }
 
 model ChatMessage {
