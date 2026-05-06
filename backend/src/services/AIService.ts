@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, DynamicRetrievalMode } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import logger from "../infrastructure/logger";
 import { 
   IProductRepository, 
@@ -9,13 +9,13 @@ import { ChatMessage, ChatRole, CartItem } from "../entities";
 
 export class AIService {
   private genAI: GoogleGenerativeAI;
-  private model: any;
+  private tools: any[];
+  private systemInstruction: string;
 
   constructor(
     private productRepository: IProductRepository,
     private chatRepository: IChatRepository,
-    private cartRepository: ICartRepository,
-    private modelName: "gemini-flash-latest" | "gemini-flash-lite-latest" = "gemini-flash-latest"
+    private cartRepository: ICartRepository
   ) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -24,7 +24,7 @@ export class AIService {
 
     this.genAI = new GoogleGenerativeAI(apiKey);
     
-    const tools = [
+    this.tools = [
       {
         functionDeclarations: [
           {
@@ -64,62 +64,88 @@ export class AIService {
       }
     ];
 
-    this.model = this.genAI.getGenerativeModel({
-      model: this.modelName,
-      tools: tools as any,
-      systemInstruction: "Você é o assistente virtual da Folio, uma livraria elegante e moderna. Seu objetivo é ajudar os usuários a encontrar livros, dar recomendações personalizadas e gerenciar o carrinho. Seja educado, culto e apaixonado por literatura. Use as ferramentas disponíveis para consultar dados reais do catálogo. IMPORTANTE: Se o usuário perguntar algo que não tenha relação com livros ou com a livraria Folio, responda de forma genérica e curta, pedindo gentilmente para que ele faça perguntas apenas sobre nossos serviços ou catálogo literário."
-    });
+    this.systemInstruction = "Você é o assistente virtual da Folio, uma livraria elegante e moderna. Seu objetivo é ajudar os usuários a encontrar livros, dar recomendações personalizadas e gerenciar o carrinho. Seja educado, culto e apaixonado por literatura. Use as ferramentas disponíveis para consultar dados reais do catálogo. IMPORTANTE: Se o usuário perguntar algo que não tenha relação com livros ou com a livraria Folio, responda de forma genérica e curta, pedindo gentilmente para que ele faça perguntas apenas sobre nossos serviços ou catálogo literário.";
   }
 
   async execute(userId: string, sessionId: string, userMessage: string): Promise<string> {
-    try {
-      const history = await this.chatRepository.getHistory(sessionId);
-      
-      const contents = history.map(msg => ({
-        role: msg.role === ChatRole.USER ? "user" : "model",
-        parts: [{ text: msg.content }]
-      }));
+    // Priority order of models to try in case of 503 Service Unavailable or 429 Rate Limits
+    const modelsToTry = [
+      "gemini-2.5-flash",
+      "gemini-3-flash",
+      "gemini-3.1-flash-lite",
+      "gemini-2.5-flash-lite",
+      "gemini-flash-latest" // backup legacy alias
+    ];
 
-      const chat = this.model.startChat({ history: contents });
+    let lastError: any = null;
 
-      let result = await chat.sendMessage(userMessage);
-      let response = result.response;
+    for (const modelName of modelsToTry) {
+      try {
+        logger.info(`Tentando processar chat usando o modelo: ${modelName}`);
 
-      const call = response.candidates[0].content.parts.find((p: any) => p.functionCall);
-      
-      if (call) {
-        const { name, args } = call.functionCall;
-        let toolResult;
+        const modelInstance = this.genAI.getGenerativeModel({
+          model: modelName,
+          tools: this.tools as any,
+          systemInstruction: this.systemInstruction
+        });
 
-        logger.info(`IA solicitou ferramenta: ${name}`, args);
+        const history = await this.chatRepository.getHistory(sessionId);
+        
+        const contents = history.map(msg => ({
+          role: msg.role === ChatRole.USER ? "user" : "model",
+          parts: [{ text: msg.content }]
+        }));
 
-        if (name === "searchBooks") {
-          toolResult = await this.productRepository.search(args.query);
-        } else if (name === "listAllBooks") {
-          toolResult = await this.productRepository.findAll(args.genre);
-        } else if (name === "addToCart") {
-          await this.cartRepository.addItem(new CartItem(userId, args.productId, args.quantity));
-          toolResult = { success: true, message: "Produto adicionado ao carrinho!" };
+        const chat = modelInstance.startChat({ history: contents });
+
+        let result = await chat.sendMessage(userMessage);
+        let response = result.response;
+
+        const candidate = response.candidates?.[0];
+        const callPart = candidate?.content?.parts?.find((p: any) => p.functionCall) as any;
+        
+        if (callPart && callPart.functionCall) {
+          const { name, args } = callPart.functionCall;
+          let toolResult;
+
+          logger.info(`IA [${modelName}] solicitou ferramenta: ${name}`, args);
+
+          if (name === "searchBooks") {
+            toolResult = await this.productRepository.search(args.query);
+          } else if (name === "listAllBooks") {
+            toolResult = await this.productRepository.findAll(args.genre);
+          } else if (name === "addToCart") {
+            await this.cartRepository.addItem(new CartItem(userId, args.productId, args.quantity));
+            toolResult = { success: true, message: "Produto adicionado ao carrinho!" };
+          }
+
+          result = await chat.sendMessage([{
+            functionResponse: {
+              name,
+              response: { content: toolResult }
+            }
+          }]);
+          response = result.response;
         }
 
-        result = await chat.sendMessage([{
-          functionResponse: {
-            name,
-            response: { content: toolResult }
-          }
-        }]);
-        response = result.response;
+        const finalContent = response.text();
+
+        // Save conversation to the database once succeeded
+        await this.chatRepository.saveMessage(new ChatMessage(userId, sessionId, ChatRole.USER, userMessage));
+        await this.chatRepository.saveMessage(new ChatMessage(userId, sessionId, ChatRole.ASSISTANT, finalContent));
+
+        logger.info(`Sucesso ao obter resposta com o modelo: ${modelName}`);
+        return finalContent;
+
+      } catch (error: any) {
+        logger.warn(`Modelo ${modelName} falhou: ${error.message}`);
+        lastError = error;
+        // Proceed to next model in loop
       }
-
-      const finalContent = response.text();
-
-      await this.chatRepository.saveMessage(new ChatMessage(userId, sessionId, ChatRole.USER, userMessage));
-      await this.chatRepository.saveMessage(new ChatMessage(userId, sessionId, ChatRole.ASSISTANT, finalContent));
-
-      return finalContent;
-    } catch (error) {
-      logger.error("Erro no AIService:", error);
-      return "Desculpe, tive um problema ao processar sua mensagem. Poderia tentar novamente?";
     }
+
+    // Fallback if all models fail
+    logger.error("Todos os modelos do Gemini falharam ao tentar responder:", lastError);
+    return "Desculpe, todos os nossos assistentes de IA estão enfrentando uma alta demanda no momento. Por favor, tente enviar sua mensagem novamente em alguns instantes!";
   }
 }
