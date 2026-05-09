@@ -189,15 +189,17 @@ Sim, a comunicação será via REST.
 | # | Pergunta |
 |---|----------|
 | 1 | Quais são as entidades principais do sistema? |
-User, Address, Product, Order, OrderItem e ChatMessage. O Carrinho ficará na memória e URL do front-end.
+User, Address, Product, Order, OrderItem, CartItem (persistente) e ChatMessage.
 | 2 | Quais atributos cada entidade terá? |
 A entidade User terá nome e telefone. Address abrigará os campos locais. Product terá arrays de strings para autores e gêneros. OrderItem guardará um snapshot do produto no momento da compra.
 | 3 | Como os relacionamentos funcionarão? |
-1:N para User -> Address, User -> Order, Order -> OrderItem e User -> ChatMessage.
+1:N para User -> Address, User -> Order, Order -> OrderItem, User -> CartItem e User -> ChatMessage.
 | 4 | O histórico de chat será salvo? |
 Sim. Numa mesma tabela relacionando a sessão, o usuário logado e, caso aja, o ID do produto recomendado pela IA.
 | 5 | A sessão de conversa terá um identificador? |
 Sim, utilizaremos um session_id gerado no front-end para agrupar as mensagens na mesma conversa, sem precisar de uma tabela de controle de sessão à parte.
+| 6 | O carrinho é persistente? |
+Sim, os itens do carrinho são salvos no banco de dados para permitir a continuidade da compra entre dispositivos e sessões.
 
 ### Entidades principais:
 
@@ -224,7 +226,6 @@ Address
 
 Product
  ├── id
- ├── seller_id
  ├── title
  ├── description
  ├── authors (Array/String)
@@ -236,8 +237,8 @@ Product
 Order
  ├── id
  ├── user_id
- ├── address_identifier
- ├── total_price
+ ├── address_snapshot (Texto completo do endereço no momento da compra)
+ ├── total_price_snapshot (Preço total fixado no momento do checkout)
  ├── status (PENDENTE, PAGO, ENVIADO, CANCELADO)
  └── created_at
 
@@ -246,9 +247,16 @@ OrderItem
  ├── order_id
  ├── product_id
  ├── product_name_snapshot
- ├── product_price_snapshot
+ ├── product_price_snapshot (Preço unitário fixado no momento da compra)
  ├── quantity
  └── subtotal
+
+CartItem (Novo)
+ ├── id
+ ├── user_id
+ ├── product_id
+ ├── quantity
+ └── added_at
 
 ChatMessage
  ├── id
@@ -267,9 +275,10 @@ User ──── 1:N ──── Addresses
 User ──── 1:N ──── Orders
 Order ─── 1:N ──── OrderItems
 Seller ── 1:N ──── Products
+User ──── 1:N ──── CartItems
 User ──── 1:N ──── ChatMessages (por sessão)
 
-* Cart viverá no Client Side (Session/LocalStorage).
+* Cart persistente no DB para usuários logados.
 ```
 
 ---
@@ -306,7 +315,26 @@ Sim
 | 4 | O chatbot deve usar contexto de conversa? |
 Sim
 | 5 | O chatbot deve usar prompt fixo ou dinâmico? |
-o chatbot usará um prompt fixo, mas com contexto dinâmico.prompt + regras + histórico + dados do usuário
+O chatbot usará um prompt fixo, mas com contexto dinâmico: prompt + regras + histórico + dados do usuário + dados de ferramentas.
+
+### 🛡️ Ferramentas (AI Tools/Functions):
+O Chatbot terá acesso às seguintes capacidades para auxiliar na compra:
+- `list_products(genre?)`: Lista produtos disponíveis, opcionalmente filtrados por gênero (conforme as seções do Figma).
+- `get_product_details(id)`: Retorna detalhes completos de um livro específico.
+- `search_books(query)`: Busca textual por títulos ou autores (Machado de Assis, etc).
+- `check_inventory(id)`: Valida se o livro está disponível em estoque.
+- `get_user_cart()`: Permite ao bot saber o que o usuário já tem interesse em comprar.
+
+### 🧠 Estratégias de Chatbot Avançado:
+Para garantir uma experiência de compra fluida e focada, as seguintes regras devem ser implementadas no Prompt do Sistema:
+
+1. **Detecção de Fora de Escopo (Out-of-Scope Detection):**
+   - O chatbot deve recusar educadamente responder a perguntas que não envolvam livros, autores, gêneros ou o funcionamento do e-commerce. (Ex: previsões do tempo, receitas, política). Ele sempre deve redirecionar o foco para o catálogo.
+
+2. **Recomendação por Similaridade (Handling Missing Books):**
+   - Se o usuário solicitar um livro (ex: "Harry Potter") que **não** existe no catálogo (`search_books` retornou vazio), o bot não deve dar uma resposta negativa curta. 
+   - A IA deve usar seu conhecimento interno para identificar o **gênero/estilo** do livro solicitado e então sugerir livros **similares que estão disponíveis** na loja. 
+   - *Exemplo de Fluxo:* Usuário pede "Livro X" (vazio) -> IA identifica que é "Misterio" -> IA chama `list_products(genre="Misterio")` -> IA responde: "No momento não temos o Livro X, mas como você gosta de mistério, temos estes disponíveis..."
 
 ---
 
@@ -340,8 +368,11 @@ Usuário digita mensagem
   Chat Service ──── busca contexto do banco ────▶ DB
         │
         ▼
-  AI Provider (ex: OpenAI)
-        │  gera resposta
+  AI Provider (Gemini) ─── identifica intenção (intents/tools)
+        │ 
+        ▼
+  Executa Ferramenta (ex: list_products) ──────▶ DB/Service
+        │
         ▼
   Salva mensagem no banco ──────────────────────▶ DB
         │
@@ -349,7 +380,7 @@ Usuário digita mensagem
   Retorna resposta ao frontend
         │
         ▼
-  Exibe mensagem no chat
+  Exibe mensagem no chat 
 ```
 
 ---
