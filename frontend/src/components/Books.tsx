@@ -1,0 +1,232 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+interface BooksProps {
+  handleHover: (genre: string, e: React.MouseEvent) => void;
+  handleMove: (e: React.MouseEvent) => void;
+  handleLeave: () => void;
+  onBookClick: (genre: string) => void;
+}
+
+export const Books: React.FC<BooksProps> = ({ handleHover, handleMove, handleLeave, onBookClick }) => (
+  <>
+    <motion.g whileHover={{
+            y: -5
+          }} transition={{
+            type: "spring",
+            stiffness: 300
+          }} onMouseEnter={e => handleHover("Fic\xE7\xE3o Cient\xEDfica", e)} onMouseMove={handleMove} onMouseLeave={handleLeave} onClick={() => onBookClick && onBookClick('ficcao')} className="livros-style-10" ><g id="ficcao_com_etiqueta" transform="translate(0.84478943,104.63057)">
+          <g id="g8-2-4-3-7-5" transform="matrix(0.65631392,-0.8405756,0.8405756,0.65631392,-75.5135,47.634368)">
+            <path d="m 62.018772,163.53702 c -0.02586,0.0109 -0.160552,0.0841 -0.299295,0.16283 -0.327981,0.18587 -1.638681,0.92911 -2.2764,1.28988 -0.309735,0.17491 -0.512874,0.29595 -0.53376,0.32007 -0.0201,0.0215 -1.082295,1.78281 -2.362373,3.91495 -1.279078,2.13068 -2.36743,3.94247 -2.416802,4.02504 -0.04939,0.0825 -0.09794,0.17639 -0.107221,0.20849 -0.02297,0.0815 -0.0107,0.17551 0.03457,0.28368 0.0576,0.13378 0.08578,0.17672 0.146618,0.22503 0.112299,0.087 5.805277,3.49198 5.868046,3.50954 0.09365,0.0271 0.224271,4.4e-4 0.309872,-0.0643 0.06251,-0.0457 0.192768,-0.25973 2.484526,-4.07679 1.650446,-2.7476 2.427211,-4.05104 2.441131,-4.0992 0.01547,-0.0535 0.02466,-0.20974 0.03433,-0.62443 0.0073,-0.30406 0.0271,-1.06896 0.0427,-1.69881 0.03505,-1.36933 0.03468,-1.24767 0.01001,-1.31278 -0.08633,-0.22094 -0.101646,-0.24217 -0.247375,-0.33184 -0.678753,-0.41823 -2.88684,-1.73243 -2.927976,-1.74258 -0.06888,-0.0164 -0.141528,-0.0119 -0.200511,0.0117 z m 0.568963,2.28898 c 0.223887,0.0258 0.426005,0.16718 0.528777,0.36736 0.17565,0.34126 0.01105,0.77439 -0.349106,0.92313 -0.103736,0.0419 -0.157635,0.0518 -0.269494,0.0497 -0.132365,-0.003 -0.244209,-0.0399 -0.35714,-0.11655 -0.309573,-0.20891 -0.391263,-0.6245 -0.184355,-0.93117 0.06371,-0.0941 0.134306,-0.15775 0.238778,-0.21628 0.09979,-0.0564 0.275968,-0.0901 0.392489,-0.0764 z" id="path1-9-5-2-6-2" fill="#e6e6e6" fillOpacity={1} stroke="none" strokeWidth={0.00124562} />
+            <path d="m 67.81403,161.49045 -1.306007,-0.2886 -1.266124,0.49829 a 2.6775877,2.6775877 147.1443 0 0 -0.887134,0.57294 l -0.479436,0.4667 a 2.6888068,2.6888068 123.38662 0 0 -0.634652,0.96299 l -0.681787,1.77589 a 0.52897014,0.52897014 52.037836 0 0 0.557622,0.7147 2.6585271,2.6585271 142.1632 0 0 1.752146,-1.36091 l 0.841223,-1.25897 z" id="path4-3-0-0-5-5" fill="none" stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill" />
+          </g>
+          <text xmlSpace="preserve" x={139.98953} y={-53.075871} id="text36-2" transform="rotate(65.245037)" className="livros-style-13" fill="url(#linearGradient8)" fillOpacity={1} stroke="#000000" strokeWidth={0.0264583} strokeLinejoin="bevel" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill">
+            <tspan id="tspan36-6" x={139.98953} y={-53.075871} className="livros-style-14" fill="url(#linearGradient8)" fillOpacity={1} strokeWidth={0.0264583}>
+              {"Fic\xE7\xE3o"}
+            </tspan>
+            <tspan x={139.98953} y={-50.65052} id="tspan71" className="livros-style-15" fill="url(#linearGradient8)" fillOpacity={1} strokeWidth={0.0264583}>
+              {" Cient\xEDfica"}
+            </tspan>
+          </text>
+          <g id="l-azul-escurosf">
+            <path id="rect2-8-9-6-5" width={9.0935946} height={41.408085} x={95.781189} y={55.21236} transform="matrix(0.99997029,0,-0.0031073,0.99999517,0.00283733,0)" d="m 95.781189,55.21236 h 7.984281 a 1.1093124,1.1093124 45 0 1 1.10931,1.109313 v 40.298772 h -9.093591 z" fill="#1a2535" fillOpacity={1} stroke="#000000" strokeWidth={0.100862} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 95.60962,55.212093 4.54659,10e-7 -0.0125,1.98293 c 0,0 0,1.478116 0,2.209112 0,0.730996 0,2.176862 0,2.176862 l 0.025,3.773225 v 4.095726 l -0.10945,5.047094 0.0971,5.982337 0.0322,8.38495 0.0645,7.755647 h -4.77221 l 0.0231,-7.43286 0.01984,-6.385449 0.02141,-6.885633 0.02479,-7.981333 0.02159,-6.950065 0.01122,-3.611993 z" id="path3-9-3-3-4" fill="#0f1828" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g22">
+            <g id="g21-9" transform="matrix(1.0063553,0,0,1.8708451,19.594933,-242.13403)" fill="#2d405b" fillOpacity={1}>
+              <rect id="rect6-7-3-2-3-3" width={9.0950899} height={1.8208345} x={75.522453} y={-162.43765} transform="scale(1,-1)" fill="#2d405b" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <path d="m 80.069999,160.61682 v 1.82084 h -4.547544 v -1.82084 z" id="path2-7" transform="translate(1.2973489e-6)" fill="#1f2d3f" fillOpacity={1} stroke="none" strokeWidth={0.0334438} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+            <g id="g21-9-4" transform="matrix(1.0063553,0,0,0.93538984,19.577341,-87.623329)" fill="#2d405b" fillOpacity={1}>
+              <rect id="rect6-7-3-2-3-3-7" width={9.0950899} height={1.8208345} x={75.522453} y={-162.43765} transform="scale(1,-1)" fill="#2d405b" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <path d="m 80.069999,160.61682 v 1.82084 h -4.547544 v -1.82084 z" id="path2-7-4" transform="translate(1.2973489e-6)" fill="#1f2d3f" fillOpacity={1} stroke="none" strokeWidth={0.0334438} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+          </g>
+          <g id="g22-8" transform="matrix(1,0,0,-1,-0.08880798,150.98332)">
+            <g id="g21-9-6" transform="matrix(1.0063553,0,0,1.8708451,19.594933,-242.13403)" fill="#2d405b" fillOpacity={1}>
+              <rect id="rect6-7-3-2-3-3-8" width={9.0950899} height={1.8208345} x={75.522453} y={-162.43765} transform="scale(1,-1)" fill="#2d405b" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <path d="m 80.069999,160.61682 v 1.82084 h -4.547544 v -1.82084 z" id="path2-7-8" transform="translate(1.2973489e-6)" fill="#1f2d3f" fillOpacity={1} stroke="none" strokeWidth={0.0334438} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+            <g id="g21-9-4-4" transform="matrix(1.0063553,0,0,0.93538984,19.577341,-87.623329)" fill="#2d405b" fillOpacity={1}>
+              <rect id="rect6-7-3-2-3-3-7-3" width={9.0950899} height={1.8208345} x={75.522453} y={-162.43765} transform="scale(1,-1)" fill="#2d405b" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <path d="m 80.069999,160.61682 v 1.82084 h -4.547544 v -1.82084 z" id="path2-7-4-1" transform="translate(1.2973489e-6)" fill="#1f2d3f" fillOpacity={1} stroke="none" strokeWidth={0.0334438} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+          </g>
+        </g></motion.g>
+    <motion.g whileHover={{
+            y: -5
+          }} transition={{
+            type: "spring",
+            stiffness: 300
+          }} onMouseEnter={e => handleHover("Filosofia", e)} onMouseMove={handleMove} onMouseLeave={handleLeave} onClick={() => onBookClick && onBookClick('filosofia')} className="livros-style-30" ><g id="filosofia_com_etiqueta" transform="translate(-8.2488082,104.63057)" fill="#ffab2e" fillOpacity={1}>
+          <g id="l-laranjasf">
+            <path id="rect2-8-9-6" width={9.0935946} height={41.408085} x={95.781189} y={55.21236} transform="matrix(1,0,-0.00310739,0.99999517,0,0)" d="m 95.781189,55.21236 h 7.984281 a 1.1093124,1.1093124 45 0 1 1.10931,1.109313 v 40.298772 h -9.093591 z" fill="#ffab2e" fillOpacity={1} stroke="#000000" strokeWidth={0.100862} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 95.60962,55.212093 0.98538,10e-7 v 1.98293 2.209112 2.176862 l 0.025,3.773225 v 4.095726 5.047094 l 0.09714,5.982337 0.03225,8.38495 0.0645,7.755647 h -1.33295 l 0.0231,-7.43286 0.01984,-6.385449 0.02141,-6.885633 0.02479,-7.981333 0.02159,-6.950065 0.01122,-3.611993 z" id="path3-9-3-3" fill="#d89023" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g24-0" transform="translate(29.091215,-76.616925)" fill="#ffab2e" fillOpacity={1}>
+            <path d="m 88.783707,51.728682 v 2.0867 a 0.07785995,0.07785995 147.54176 0 1 -0.110868,0.07052 3.2580205,3.2580205 12.537148 0 0 -1.371798,-0.305054 l -3.855505,-0.01171 a 3.1799321,3.1799321 167.33402 0 0 -1.378951,0.3099 l -0.0618,0.02948 a 0.04348396,0.04348396 32.246393 0 1 -0.06221,-0.03925 l -4.5e-5,-2.071418 0.344694,-0.160061 a 1.990007,1.990007 160.99146 0 1 0.386777,-0.133242 l 0.113757,-0.02649 a 2.2825505,2.2825505 173.03628 0 1 0.485087,-0.05925 l 3.879674,-0.05542 a 3.6457968,3.6457968 5.2812355 0 1 0.771507,0.07132 4.6351936,4.6351936 18.878669 0 1 0.859678,0.293976 z" id="path19-8-6" transform="matrix(1.3287712,0,0,0.60200641,-42.478357,137.32114)" fill="#f29e21" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 67.690425,168.30074 0.01069,1.28538 -0.195663,0.0263 -0.414677,0.0503 -0.521417,0.094 -0.08212,0.0177 -0.08266,-0.0236 -6.7e-5,-1.24698 0.458023,-0.0964 0.419484,-0.0694 z" id="path21-2" fill="#dc880d" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g25-1" transform="translate(29.093717,-75.165311)">
+            <path d="m 88.783707,51.728682 v 2.0867 a 0.07785995,0.07785995 147.54176 0 1 -0.110868,0.07052 3.2580205,3.2580205 12.537148 0 0 -1.371798,-0.305054 l -3.855505,-0.01171 a 3.1799321,3.1799321 167.33402 0 0 -1.378951,0.3099 l -0.0618,0.02948 a 0.04348396,0.04348396 32.246393 0 1 -0.06221,-0.03925 l -4.5e-5,-2.071418 0.344694,-0.160061 a 1.990007,1.990007 160.99146 0 1 0.386777,-0.133242 l 0.113757,-0.02649 a 2.2825505,2.2825505 173.03628 0 1 0.485087,-0.05925 l 3.879674,-0.05542 a 3.6457968,3.6457968 5.2812355 0 1 0.771507,0.07132 4.6351936,4.6351936 18.878669 0 1 0.859678,0.293976 z" id="path10-2" transform="matrix(1.3287712,0,0,1,-42.469309,112.63873)" fill="#ffffff" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 67.660145,166.2567 -1.163855,0.29055 -0.08266,-0.0392 -6.2e-5,-2.07142 0.567021,-0.19597 0.199782,-0.0548 0.205155,-0.0426 0.151158,-0.0265 0.122619,-0.0195 z" id="path22-9" fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g24-0-5" transform="translate(29.107274,-81.350966)" fill="#ffab2e" fillOpacity={1}>
+            <path d="m 88.783707,51.728682 v 2.0867 a 0.07785995,0.07785995 147.54176 0 1 -0.110868,0.07052 3.2580205,3.2580205 12.537148 0 0 -1.371798,-0.305054 l -3.855505,-0.01171 a 3.1799321,3.1799321 167.33402 0 0 -1.378951,0.3099 l -0.0618,0.02948 a 0.04348396,0.04348396 32.246393 0 1 -0.06221,-0.03925 l -4.5e-5,-2.071418 0.344694,-0.160061 a 1.990007,1.990007 160.99146 0 1 0.386777,-0.133242 l 0.113757,-0.02649 a 2.2825505,2.2825505 173.03628 0 1 0.485087,-0.05925 l 3.879674,-0.05542 a 3.6457968,3.6457968 5.2812355 0 1 0.771507,0.07132 4.6351936,4.6351936 18.878669 0 1 0.859678,0.293976 z" id="path19-8-6-5" transform="matrix(1.3287712,0,0,0.60200641,-42.478357,137.32114)" fill="#f29e21" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 67.690425,168.30074 0.01069,1.28538 -0.195663,0.0263 -0.414677,0.0503 -0.521417,0.094 -0.08212,0.0177 -0.08266,-0.0236 -6.7e-5,-1.24698 0.458023,-0.0964 0.419484,-0.0694 z" id="path21-2-4" fill="#dc880d" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <rect id="rect9" width={4.9734755} height={10.54377} x={105.51168} y={162.9286} ry={0.10584785} rx={0} transform="translate(-7.6261926,-104.63057)" opacity={0.28} fill="#cf7d00" fillOpacity={1} stroke="#291717" strokeWidth={0.0265248} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          <g id="g8-2-4-3-7" transform="rotate(-42.786686,2.6895205,83.954396)">
+            <path d="m 62.790566,164.33007 c -0.02756,0.0116 -0.171177,0.0897 -0.319102,0.17361 -0.349684,0.19817 -1.747121,0.9906 -2.427042,1.37523 -0.33023,0.18649 -0.546811,0.31554 -0.56908,0.34126 -0.02143,0.023 -1.153917,1.90079 -2.518704,4.17402 -1.363721,2.27167 -2.524095,4.20336 -2.576734,4.2914 -0.05266,0.0879 -0.104423,0.18807 -0.114316,0.22228 -0.0245,0.0869 -0.01141,0.18712 0.03685,0.30246 0.06142,0.14263 0.09146,0.18841 0.156319,0.23992 0.119733,0.0927 6.189444,3.72306 6.256364,3.74178 0.09985,0.029 0.239115,4.6e-4 0.33038,-0.0685 0.06665,-0.0487 0.205524,-0.27689 2.64894,-4.34656 1.759664,-2.92944 2.587832,-4.31912 2.602672,-4.37047 0.0165,-0.057 0.0263,-0.22362 0.03661,-0.66576 0.0078,-0.32417 0.02889,-1.13969 0.04552,-1.81122 0.03736,-1.45994 0.03697,-1.33023 0.01067,-1.39965 -0.09204,-0.23556 -0.108372,-0.2582 -0.263745,-0.35381 -0.72367,-0.44591 -3.077877,-1.84708 -3.121736,-1.8579 -0.07344,-0.0175 -0.150894,-0.0127 -0.213779,0.0125 z m 0.606613,2.44046 c 0.238702,0.0275 0.454196,0.17823 0.563769,0.39166 0.187275,0.36385 0.01178,0.82565 -0.372208,0.98423 -0.1106,0.0446 -0.168067,0.0552 -0.287328,0.053 -0.141125,-0.003 -0.260369,-0.0426 -0.380774,-0.12426 -0.330058,-0.22273 -0.417155,-0.66583 -0.196554,-0.9928 0.06793,-0.10033 0.143194,-0.16818 0.254578,-0.23058 0.106396,-0.0602 0.294231,-0.096 0.418463,-0.0814 z" id="path1-9-5-2-6" fill="#e6e6e6" fillOpacity={1} stroke="none" strokeWidth={0.00132805} />
+            <path d="m 67.81403,161.49045 -1.306007,-0.2886 -1.266124,0.49829 a 2.6775877,2.6775877 147.1443 0 0 -0.887134,0.57294 l -0.479436,0.4667 a 2.6888068,2.6888068 123.38662 0 0 -0.634652,0.96299 l -0.681787,1.77589 a 0.52897014,0.52897014 52.037836 0 0 0.557622,0.7147 2.6585271,2.6585271 142.1632 0 0 1.752146,-1.36091 l 0.841223,-1.25897 z" id="path4-3-0-0-5" fill="none" stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill" />
+          </g>
+          <text xmlSpace="preserve" x={140.50854} y={-49.291023} id="text36-2-9" transform="rotate(65.245037)" className="livros-style-45" fill="url(#linearGradient9)" fillOpacity={1} stroke="#000000" strokeWidth={0.0264583} strokeLinejoin="bevel" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill">
+            <tspan x={140.50854} y={-49.291023} id="tspan71-8" className="livros-style-46" fill="url(#linearGradient9)" fillOpacity={1} strokeWidth={0.0264583}>
+              {"Filosofia"}
+            </tspan>
+          </text>
+        </g></motion.g>
+    <motion.g whileHover={{
+            y: -5
+          }} transition={{
+            type: "spring",
+            stiffness: 300
+          }} onMouseEnter={e => handleHover("Literatura Cl\xE1ssica", e)} onMouseMove={handleMove} onMouseLeave={handleLeave} onClick={() => onBookClick && onBookClick('classica')} className="livros-style-47" ><g id="literatura_classica_com_etiqueta" transform="matrix(0.86715299,0,0,0.90538704,13.816049,19.04448)">
+          <g id="l-vermelho-clarosf" transform="matrix(1,0,0,1.1059403,-20.085999,94.39462)" fill="#c05742" fillOpacity={1}>
+            <path id="rect2-8-9-8" width={9.0935946} height={41.408085} x={95.781189} y={55.21236} transform="matrix(1,0,-0.00310739,0.99999517,0,0)" d="m 95.781189,55.21236 h 7.984281 a 1.1093124,1.1093124 45 0 1 1.10931,1.109313 v 40.298772 h -9.093591 z" fill="#c05742" fillOpacity={1} stroke="#000000" strokeWidth={0.100862} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 95.60962,55.212093 4.54638,10e-7 v 2.274535 2.354915 1.739454 3.773225 4.095726 5.047094 5.982337 8.38495 7.755647 h -4.67506 l 0.0231,-7.43286 0.01984,-6.385449 0.02141,-6.885633 0.02479,-7.981333 0.02159,-6.950065 0.01122,-3.611993 z" id="path3-9-3-8" fill="#92493f" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g8-2-4-3" transform="matrix(0.9573843,-0.84871343,0.88613445,0.91695443,-127.28588,110.70541)" fill="#c05742" fillOpacity={1}>
+            <path d="m 62.018772,163.53702 c -0.02586,0.0109 -0.160552,0.0841 -0.299295,0.16283 -0.327981,0.18587 -1.638681,0.92911 -2.2764,1.28988 -0.309735,0.17491 -0.512874,0.29595 -0.53376,0.32007 -0.0201,0.0215 -1.082295,1.78281 -2.362373,3.91495 -1.279078,2.13068 -2.36743,3.94247 -2.416802,4.02504 -0.04939,0.0825 -0.09794,0.17639 -0.107221,0.20849 -0.02297,0.0815 -0.0107,0.17551 0.03457,0.28368 0.0576,0.13378 0.08578,0.17672 0.146618,0.22503 0.112299,0.087 5.805277,3.49198 5.868046,3.50954 0.09365,0.0271 0.224271,4.4e-4 0.309872,-0.0643 0.06251,-0.0457 0.192768,-0.25973 2.484526,-4.07679 1.650446,-2.7476 2.427211,-4.05104 2.441131,-4.0992 0.01547,-0.0535 0.02466,-0.20974 0.03433,-0.62443 0.0073,-0.30406 0.0271,-1.06896 0.0427,-1.69881 0.03505,-1.36933 0.03468,-1.24767 0.01001,-1.31278 -0.08633,-0.22094 -0.101646,-0.24217 -0.247375,-0.33184 -0.678753,-0.41823 -2.88684,-1.73243 -2.927976,-1.74258 -0.06888,-0.0164 -0.141528,-0.0119 -0.200511,0.0117 z m 0.568963,2.28898 c 0.223887,0.0258 0.426005,0.16718 0.528777,0.36736 0.17565,0.34126 0.01105,0.77439 -0.349106,0.92313 -0.103736,0.0419 -0.157635,0.0518 -0.269494,0.0497 -0.132365,-0.003 -0.244209,-0.0399 -0.35714,-0.11655 -0.309573,-0.20891 -0.391263,-0.6245 -0.184355,-0.93117 0.06371,-0.0941 0.134306,-0.15775 0.238778,-0.21628 0.09979,-0.0564 0.275968,-0.0901 0.392489,-0.0764 z" id="path1-9-5-2" fill="#e6e6e6" fillOpacity={1} stroke="none" strokeWidth={0.00124562} />
+            <path d="m 67.81403,161.49045 -1.306007,-0.2886 -1.266124,0.49829 a 2.6775877,2.6775877 147.1443 0 0 -0.887134,0.57294 l -0.479436,0.4667 a 2.6888068,2.6888068 123.38662 0 0 -0.634652,0.96299 l -0.681787,1.77589 a 0.52897014,0.52897014 52.037836 0 0 0.557622,0.7147 2.6585271,2.6585271 142.1632 0 0 1.752146,-1.36091 l 0.841223,-1.25897 z" id="path4-3-0-0" fill="none" stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill" />
+          </g>
+          <text xmlSpace="preserve" x={230.69383} y={-8.6590014} id="text36-2-8" transform="matrix(0.31390248,0.93133351,-0.97239744,0.30064649,0,0)" className="livros-style-54" fill="url(#linearGradient10)" fillOpacity={1} stroke="#000000" strokeWidth={0.0298605} strokeLinejoin="bevel" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill">
+            <tspan id="tspan36-6-3" x={230.69383} y={-8.6590014} className="livros-style-55" fill="url(#linearGradient10)" fillOpacity={1} strokeWidth={0.0298605}>
+              {"Literatura"}
+            </tspan>
+            <tspan x={230.69383} y={-5.9217887} id="tspan71-3" className="livros-style-56" fill="url(#linearGradient10)" fillOpacity={1} strokeWidth={0.0298605}>
+              {" Cl\xE1ssica"}
+            </tspan>
+          </text>
+          <g id="g5-4">
+            <g id="g21">
+              <rect id="rect6-7-3-2-3" width={9.0950899} height={1.8208345} x={75.522453} y={-162.43765} transform="scale(1,-1)" fill="#f79419" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <path d="m 80.069999,160.61682 v 1.82084 h -4.547544 v -1.82084 z" id="path2" transform="translate(1.2973489e-6)" fill="#b3712f" fillOpacity={1} stroke="none" strokeWidth={0.0334438} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+            <g id="g20">
+              <rect id="rect6-7-3-2-9-1" width={9.0950899} height={1.8208345} x={75.522453} y={-166.43669} transform="scale(1,-1)" fill="#f79419" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <path d="m 80.069999,164.61586 v 1.82083 h -4.547544 v -1.82083 z" id="path5" transform="translate(1.2973489e-6)" fill="#b3712e" fillOpacity={1} stroke="none" strokeWidth={0.0334438} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+          </g>
+          <g id="g27" transform="matrix(1.1531991,0,0,1.1045,-34.239701,-21.034628)">
+            <rect id="rect5" width={7.8798585} height={2.6091075} x={95.079124} y={197.37123} ry={0} fill="#f59417" fillOpacity={1} stroke="#291717" strokeWidth={0.0279793} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 99.097141,197.37123 v 2.60042 h -4.018018 l 10e-7,-2.60042 z" id="path6" fill="#b6712d" fillOpacity={1} stroke="none" strokeWidth={0.0296333} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g26" transform="matrix(1.1531991,0,0,1.1045,-34.239701,-21.034628)">
+            <path id="path7" d="m 100.84113,179.16939 c 0,1.61877 -0.29934,3.05065 -0.75813,3.92169 -0.351526,-0.6674 -1.728736,-0.66745 -2.080278,-4e-5 -0.458781,-0.87104 -0.758117,-2.3029 -0.758117,-3.92165 0,-1.46644 0.245657,-2.77952 0.632969,-3.66121 0.362978,0.82632 1.967613,0.82638 2.330606,4e-5 0.3873,0.88169 0.63295,2.19475 0.63295,3.66117 z" fill="#f79218" fillOpacity={1} stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 99.123645,176.12609 3.54e-4,2.40353 v 2.03169 l 0.0053,2.03143 -0.519887,0.0564 -0.228227,0.0883 -0.221537,0.1516 -0.156968,0.20205 -0.261692,-0.60555 -0.176377,-0.57824 -0.129571,-0.58245 -0.09456,-0.6028 -0.06073,-0.60165 -0.02648,-0.47605 -0.0087,-0.47491 0.009,-0.48308 0.02738,-0.48376 0.04692,-0.48324 0.06824,-0.48434 0.08582,-0.45399 0.111905,-0.45889 0.09969,-0.33036 0.119626,-0.32977 0.05305,-0.12778 0.0122,-0.024 0.17567,0.25629 0.237279,0.17883 0.275868,0.11524 0.324553,0.0609 z" id="path8" fill="#b6712d" fillOpacity={1} stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+        </g></motion.g>
+    <motion.g whileHover={{
+            y: -5
+          }} transition={{
+            type: "spring",
+            stiffness: 300
+          }} onMouseEnter={e => handleHover("Fantasia", e)} onMouseMove={handleMove} onMouseLeave={handleLeave} onClick={() => onBookClick && onBookClick('fantasia')} className="livros-style-65" ><g id="fantasia_com_etiqueta" transform="translate(-5.2916669)">
+          <g id="l-azul-clarosf" transform="matrix(1,0,0,1.1059403,-20.085999,94.39462)" fill="#277ab4" fillOpacity={1}>
+            <path id="rect2-8-9" width={9.0935946} height={41.408085} x={95.781189} y={55.21236} transform="matrix(1,0,-0.00310739,0.99999517,0,0)" d="m 95.781189,55.21236 h 7.984281 a 1.1093124,1.1093124 45 0 1 1.10931,1.109313 v 40.298772 h -9.093591 z" fill="#277ab4" fillOpacity={1} stroke="#000000" strokeWidth={0.100862} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 95.60962,55.212093 4.54638,10e-7 v 2.274535 2.354915 1.739454 3.773225 4.095726 5.047094 5.982337 8.38495 7.755647 h -4.67506 l 0.0231,-7.43286 0.01984,-6.385449 0.02141,-6.885633 0.02479,-7.981333 0.02159,-6.950065 0.01122,-3.611993 z" id="path3-9-3" fill="#1e679a" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g5">
+            <rect id="rect6-7-3-2" width={9.0950899} height={1.8208345} x={75.522453} y={-159.79224} transform="scale(1,-1)" fill="#0e4e76" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <rect id="rect6-7-3-2-9" width={9.0950899} height={1.8208345} x={75.522453} y={-164.32036} transform="scale(1,-1)" fill="#0e4e76" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g5-7" transform="translate(1.3051758e-6,35.526862)">
+            <rect id="rect6-7-3-2-5" width={9.0950899} height={1.8208345} x={75.522453} y={-159.79224} transform="scale(1,-1)" fill="#0e4e76" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <rect id="rect6-7-3-2-9-9" width={9.0950899} height={1.8208345} x={75.522453} y={-164.32036} transform="scale(1,-1)" fill="#0e4e76" fillOpacity={1} stroke="none" strokeWidth={0.148035} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <path id="rect6-73" width={5} height={24.65966} x={77.57} y={166.19276} ry={0} rx={0} d="m 78.317066,166.19276 h 3.505868 L 82.57,166.93983 v 23.16553 l -0.747066,0.74706 H 78.317066 L 77.57,190.10536 v -23.16553 z" fill="none" fillOpacity={1} stroke="#000000" strokeWidth={0.124761} strokeLinejoin="round" strokeOpacity={1} paintOrder="markers stroke fill" />
+          <g id="g8-2-4" transform="matrix(1.1781178,-0.0917355,0.0917355,1.1781178,-11.131983,17.142075)">
+            <path d="m 62.018772,163.53702 c -0.02586,0.0109 -0.160552,0.0841 -0.299295,0.16283 -0.327981,0.18587 -1.638681,0.92911 -2.2764,1.28988 -0.309735,0.17491 -0.512874,0.29595 -0.53376,0.32007 -0.0201,0.0215 -1.082295,1.78281 -2.362373,3.91495 -1.279078,2.13068 -2.36743,3.94247 -2.416802,4.02504 -0.04939,0.0825 -0.09794,0.17639 -0.107221,0.20849 -0.02297,0.0815 -0.0107,0.17551 0.03457,0.28368 0.0576,0.13378 0.08578,0.17672 0.146618,0.22503 0.112299,0.087 5.805277,3.49198 5.868046,3.50954 0.09365,0.0271 0.224271,4.4e-4 0.309872,-0.0643 0.06251,-0.0457 0.192768,-0.25973 2.484526,-4.07679 1.650446,-2.7476 2.427211,-4.05104 2.441131,-4.0992 0.01547,-0.0535 0.02466,-0.20974 0.03433,-0.62443 0.0073,-0.30406 0.0271,-1.06896 0.0427,-1.69881 0.03505,-1.36933 0.03468,-1.24767 0.01001,-1.31278 -0.08633,-0.22094 -0.101646,-0.24217 -0.247375,-0.33184 -0.678753,-0.41823 -2.88684,-1.73243 -2.927976,-1.74258 -0.06888,-0.0164 -0.141528,-0.0119 -0.200511,0.0117 z m 0.568963,2.28898 c 0.223887,0.0258 0.426005,0.16718 0.528777,0.36736 0.17565,0.34126 0.01105,0.77439 -0.349106,0.92313 -0.103736,0.0419 -0.157635,0.0518 -0.269494,0.0497 -0.132365,-0.003 -0.244209,-0.0399 -0.35714,-0.11655 -0.309573,-0.20891 -0.391263,-0.6245 -0.184355,-0.93117 0.06371,-0.0941 0.134306,-0.15775 0.238778,-0.21628 0.09979,-0.0564 0.275968,-0.0901 0.392489,-0.0764 z" id="path1-9-5" fill="#e6e6e6" fillOpacity={1} stroke="none" strokeWidth={0.00124562} />
+            <path d="m 67.81403,161.49045 -1.306007,-0.2886 -1.266124,0.49829 a 2.6775877,2.6775877 147.1443 0 0 -0.887134,0.57294 l -0.479436,0.4667 a 2.6888068,2.6888068 123.38662 0 0 -0.634652,0.96299 l -0.681787,1.77589 a 0.52897014,0.52897014 52.037836 0 0 0.557622,0.7147 2.6585271,2.6585271 142.1632 0 0 1.752146,-1.36091 l 0.841223,-1.25897 z" id="path4-3-0" fill="none" stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill" />
+          </g>
+          <text xmlSpace="preserve" x={-141.73352} y={179.5743} id="text36-9" transform="rotate(-56.889206)" className="livros-style-76" fill="url(#linearGradient11)" fillOpacity={1} stroke="#000000" strokeWidth={0.0264583} strokeLinejoin="bevel" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill">
+            <tspan id="tspan36-0" x={-141.73352} y={179.5743} className="livros-style-77" fill="url(#linearGradient11)" fillOpacity={1} strokeWidth={0.0264583}>
+              {"Fantasia"}
+            </tspan>
+          </text>
+        </g></motion.g>
+    <motion.g whileHover={{
+            y: -5
+          }} transition={{
+            type: "spring",
+            stiffness: 300
+          }} onMouseEnter={e => handleHover("Poesia", e)} onMouseMove={handleMove} onMouseLeave={handleLeave} onClick={() => onBookClick && onBookClick('poesia')} className="livros-style-78" ><g id="poesia_com_etiqueta" transform="translate(-5.2916669)">
+          <g id="g8-2" transform="matrix(1.1782819,-0.09174803,0.09174827,1.1782787,-23.98373,17.114279)" fill="#3e6745" fillOpacity={1}>
+            <path d="m 62.018772,163.53702 c -0.02586,0.0109 -0.160552,0.0841 -0.299295,0.16283 -0.327981,0.18587 -1.638681,0.92911 -2.2764,1.28988 -0.309735,0.17491 -0.512874,0.29595 -0.53376,0.32007 -0.0201,0.0215 -1.082295,1.78281 -2.362373,3.91495 -1.279078,2.13068 -2.36743,3.94247 -2.416802,4.02504 -0.04939,0.0825 -0.09794,0.17639 -0.107221,0.20849 -0.02297,0.0815 -0.0107,0.17551 0.03457,0.28368 0.0576,0.13378 0.08578,0.17672 0.146618,0.22503 0.112299,0.087 5.805277,3.49198 5.868046,3.50954 0.09365,0.0271 0.224271,4.4e-4 0.309872,-0.0643 0.06251,-0.0457 0.192768,-0.25973 2.484526,-4.07679 1.650446,-2.7476 2.427211,-4.05104 2.441131,-4.0992 0.01547,-0.0535 0.02466,-0.20974 0.03433,-0.62443 0.0073,-0.30406 0.0271,-1.06896 0.0427,-1.69881 0.03505,-1.36933 0.03468,-1.24767 0.01001,-1.31278 -0.08633,-0.22094 -0.101646,-0.24217 -0.247375,-0.33184 -0.678753,-0.41823 -2.88684,-1.73243 -2.927976,-1.74258 -0.06888,-0.0164 -0.141528,-0.0119 -0.200511,0.0117 z m 0.568963,2.28898 c 0.223887,0.0258 0.426005,0.16718 0.528777,0.36736 0.17565,0.34126 0.01105,0.77439 -0.349106,0.92313 -0.103736,0.0419 -0.157635,0.0518 -0.269494,0.0497 -0.132365,-0.003 -0.244209,-0.0399 -0.35714,-0.11655 -0.309573,-0.20891 -0.391263,-0.6245 -0.184355,-0.93117 0.06371,-0.0941 0.134306,-0.15775 0.238778,-0.21628 0.09979,-0.0564 0.275968,-0.0901 0.392489,-0.0764 z" id="path1-9" fill="#e6e6e6" stroke="none" strokeWidth={0.00124562} />
+            <path d="m 67.81403,161.49045 -1.306007,-0.2886 -1.266124,0.49829 a 2.6775877,2.6775877 147.1443 0 0 -0.887134,0.57294 l -0.479436,0.4667 a 2.6888068,2.6888068 123.38662 0 0 -0.634652,0.96299 l -0.681787,1.77589 a 0.52897014,0.52897014 52.037836 0 0 0.557622,0.7147 2.6585271,2.6585271 142.1632 0 0 1.752146,-1.36091 l 0.841223,-1.25897 z" id="path4-3" fill="none" stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill" />
+          </g>
+          <text xmlSpace="preserve" x={-147.59064} y={168.6041} id="text36-9-2" transform="rotate(-56.889206)" className="livros-style-82" fill="url(#linearGradient12)" fillOpacity={1} stroke="#000000" strokeWidth={0.0264583} strokeLinejoin="bevel" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill">
+            <tspan id="tspan36-0-6" x={-147.59064} y={168.6041} className="livros-style-83" fill="url(#linearGradient12)" fillOpacity={1} strokeWidth={0.0264583}>
+              {"Poesia"}
+            </tspan>
+          </text>
+          <g id="l-verde-clarosf" transform="translate(-29.179594,104.63057)" fill="#3e6745" fillOpacity={1}>
+            <path id="rect2-8" width={9.0935946} height={41.408085} x={95.781189} y={55.21236} transform="matrix(1,0,-0.00310739,0.99999517,0,0)" d="m 95.781189,55.21236 h 7.976121 a 1.1174754,1.1174754 45 0 1 1.11747,1.117476 v 40.290609 h -9.093591 z" fill="#68916f" fillOpacity={1} stroke="#000000" strokeWidth={0.100862} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 95.60962,55.212093 0.98538,10e-7 v 1.98293 2.209112 2.176862 l 0.025,3.773225 v 4.095726 5.047094 l 0.09714,5.982337 0.03225,8.38495 0.0645,7.755647 h -1.33295 l 0.0231,-7.43286 0.01984,-6.385449 0.02141,-6.885633 0.02479,-7.981333 0.02159,-6.950065 0.01122,-3.611993 z" id="path3-9" fill="#587b5a" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g342">
+            <g id="g341" transform="translate(-29.179594,104.63057)" fill="#3e6745" fillOpacity={1}>
+              <rect id="rect6" width={5} height={21.627466} x={97.678329} y={65.573265} ry={0.65520561} fill="#fdfcfe" fillOpacity={1} stroke="none" strokeWidth={0.116839} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <ellipse id="path9" cx={81.563805} cy={196.42108} rx={2.4860766} ry={2.4860764} transform="translate(18.59626,-104.63057)" fill="#56765c" fillOpacity={1} stroke="#291717" strokeWidth={0.0278472} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+            <g id="g2">
+              <g id="g24" transform="translate(0.00901684,-1.0728503)">
+                <path d="m 88.783707,51.728682 v 2.0867 a 0.07785995,0.07785995 147.54176 0 1 -0.110868,0.07052 3.2580205,3.2580205 12.537148 0 0 -1.371798,-0.305054 l -3.855505,-0.01171 a 3.1799321,3.1799321 167.33402 0 0 -1.378951,0.3099 l -0.0618,0.02948 a 0.04348396,0.04348396 32.246393 0 1 -0.06221,-0.03925 l -4.5e-5,-2.071418 0.344694,-0.160061 a 1.990007,1.990007 160.99146 0 1 0.386777,-0.133242 l 0.113757,-0.02649 a 2.2825505,2.2825505 173.03628 0 1 0.485087,-0.05925 l 3.879674,-0.05542 a 3.6457968,3.6457968 5.2812355 0 1 0.771507,0.07132 4.6351936,4.6351936 18.878669 0 1 0.859678,0.293976 z" id="path19-8" transform="matrix(1.3287712,0,0,0.60200641,-42.478357,137.32114)" fill="#ffffff" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+                <path d="m 67.452057,168.31924 -0.01397,1.31469 -1.014595,0.17658 -0.01897,-1.30673 z" id="path21" fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              </g>
+              <g id="g24-3" transform="translate(0.02201511,-6.5578607)">
+                <path d="m 88.783707,51.728682 v 2.0867 a 0.07785995,0.07785995 147.54176 0 1 -0.110868,0.07052 3.2580205,3.2580205 12.537148 0 0 -1.371798,-0.305054 l -3.855505,-0.01171 a 3.1799321,3.1799321 167.33402 0 0 -1.378951,0.3099 l -0.0618,0.02948 a 0.04348396,0.04348396 32.246393 0 1 -0.06221,-0.03925 l -4.5e-5,-2.071418 0.344694,-0.160061 a 1.990007,1.990007 160.99146 0 1 0.386777,-0.133242 l 0.113757,-0.02649 a 2.2825505,2.2825505 173.03628 0 1 0.485087,-0.05925 l 3.879674,-0.05542 a 3.6457968,3.6457968 5.2812355 0 1 0.771507,0.07132 4.6351936,4.6351936 18.878669 0 1 0.859678,0.293976 z" id="path19-8-5" transform="matrix(1.3287712,0,0,0.60200641,-42.478357,137.32114)" fill="#ffffff" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+                <path d="m 67.452057,168.31924 -0.01397,1.31469 -1.014595,0.17658 -0.01897,-1.30673 z" id="path21-6" fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              </g>
+              <g id="g25">
+                <path d="m 88.783707,51.728682 v 2.0867 a 0.07785995,0.07785995 147.54176 0 1 -0.110868,0.07052 3.2580205,3.2580205 12.537148 0 0 -1.371798,-0.305054 l -3.855505,-0.01171 a 3.1799321,3.1799321 167.33402 0 0 -1.378951,0.3099 l -0.0618,0.02948 a 0.04348396,0.04348396 32.246393 0 1 -0.06221,-0.03925 l -4.5e-5,-2.071418 0.344694,-0.160061 a 1.990007,1.990007 160.99146 0 1 0.386777,-0.133242 l 0.113757,-0.02649 a 2.2825505,2.2825505 173.03628 0 1 0.485087,-0.05925 l 3.879674,-0.05542 a 3.6457968,3.6457968 5.2812355 0 1 0.771507,0.07132 4.6351936,4.6351936 18.878669 0 1 0.859678,0.293976 z" id="path10" transform="matrix(1.3287712,0,0,1,-42.469309,112.63873)" fill="#ffffff" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+                <path d="m 67.43267,166.29194 -0.93638,0.25531 -0.08266,-0.0392 -6.2e-5,-2.07142 0.567021,-0.19597 0.404936,-0.0973 z" id="path22" fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              </g>
+            </g>
+          </g>
+        </g></motion.g>
+    <motion.g whileHover={{
+            y: -5
+          }} transition={{
+            type: "spring",
+            stiffness: 300
+          }} onMouseEnter={e => handleHover("Romance", e)} onMouseMove={handleMove} onMouseLeave={handleLeave} onClick={() => onBookClick && onBookClick('romance')} className="livros-style-96" ><g id="romance_com_etiqueta" transform="rotate(8.8283358,57.583839,126.75809)">
+          <g id="l-vermelhosf" transform="matrix(1,0,0,0.94922126,-38.273191,109.53681)">
+            <path id="rect2" width={9.0935946} height={41.408085} x={95.781189} y={55.21236} transform="matrix(1,0,-0.00310739,0.99999517,0,0)" d="m 95.781189,55.21236 h 7.984281 a 1.1093124,1.1093124 45 0 1 1.10931,1.109313 v 40.298772 h -9.093591 z" fill="#cb3e3d" fillOpacity={1} stroke="#000000" strokeWidth={0.100862} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            <path d="m 95.60962,55.212093 0.98538,10e-7 v 1.98293 2.209112 2.176862 l 0.025,3.773225 v 4.095726 5.047094 l 0.09714,5.982337 0.03225,8.38495 0.0645,7.755647 h -1.33295 l 0.0231,-7.43286 0.01984,-6.385449 0.02141,-6.885633 0.02479,-7.981333 0.02159,-6.950065 0.01122,-3.611993 z" id="path3" fill="#ab3731" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+          </g>
+          <g id="g343">
+            <g id="g6">
+              <rect id="rect5-2" width={9.0855722} height={2.5814598} x={57.219303} y={194.95265} fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <rect id="rect6-7" width={9.0950899} height={0.95777023} x={57.230854} y={192.85992} fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.107364} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <rect id="rect6-7-6" width={9.0950899} height={0.95777023} x={57.240772} y={190.62497} fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.107364} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+            <g id="g6-6" transform="matrix(1,0,0,-1,0.08762497,361.9727)">
+              <rect id="rect5-2-9" width={9.0855722} height={2.5814598} x={57.219303} y={194.95265} fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.1} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <rect id="rect6-7-3" width={9.0950899} height={0.95777023} x={57.230854} y={192.85992} fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.107364} strokeLinejoin="round" paintOrder="markers stroke fill" />
+              <rect id="rect6-7-6-7" width={9.0950899} height={0.95777023} x={57.240772} y={190.62497} fill="#f9f9f9" fillOpacity={1} stroke="none" strokeWidth={0.107364} strokeLinejoin="round" paintOrder="markers stroke fill" />
+            </g>
+          </g>
+          <g id="g8" transform="rotate(-8.8283358,65.521351,229.58278)">
+            <path d="m 61.681467,163.54069 c -0.02843,0.0128 -0.176511,0.0988 -0.329045,0.19133 -0.360581,0.21839 -1.801562,1.09169 -2.502667,1.5156 -0.340522,0.20551 -0.563852,0.34774 -0.586814,0.37608 -0.0221,0.0253 -1.189873,2.09479 -2.597188,4.60001 -1.406216,2.50354 -2.602748,4.63238 -2.657027,4.7294 -0.0543,0.0969 -0.107675,0.20726 -0.117879,0.24497 -0.02525,0.0958 -0.01176,0.20623 0.03801,0.33333 0.06332,0.15719 0.09431,0.20764 0.161191,0.26441 0.123461,0.10222 6.382307,4.10303 6.451315,4.12366 0.102959,0.0318 0.246563,5.2e-4 0.340673,-0.0755 0.06872,-0.0537 0.211928,-0.30518 2.731482,-4.79018 1.814497,-3.22841 2.668471,-4.75995 2.683774,-4.81654 0.01701,-0.0629 0.02711,-0.24644 0.03774,-0.7337 0.008,-0.35726 0.02979,-1.25599 0.04694,-1.99606 0.03853,-1.60896 0.03813,-1.46601 0.01101,-1.54251 -0.09491,-0.2596 -0.111749,-0.28455 -0.271964,-0.38991 -0.746219,-0.49142 -3.173785,-2.0356 -3.21901,-2.04752 -0.07573,-0.0193 -0.155596,-0.014 -0.220441,0.0137 z m 0.625516,2.68954 c 0.246141,0.0303 0.468349,0.19643 0.581337,0.43164 0.193109,0.40098 0.01215,0.90991 -0.383807,1.08468 -0.114047,0.0492 -0.173303,0.0609 -0.296281,0.0584 -0.145522,-0.004 -0.268483,-0.0469 -0.392639,-0.13694 -0.340344,-0.24547 -0.430154,-0.73379 -0.202679,-1.09412 0.07004,-0.11057 0.147655,-0.18536 0.262512,-0.25413 0.109709,-0.0663 0.303398,-0.10587 0.431501,-0.0898 z" id="path1" fill="#e6e6e6" fillOpacity={1} stroke="none" strokeWidth={0.00141573} />
+            <path d="m 67.81403,161.49045 -1.306007,-0.2886 -1.266124,0.49829 a 2.6775877,2.6775877 147.1443 0 0 -0.887134,0.57294 l -0.479436,0.4667 a 2.6888068,2.6888068 123.38662 0 0 -0.634652,0.96299 l -0.681787,1.77589 a 0.52897014,0.52897014 52.037836 0 0 0.557622,0.7147 2.6585271,2.6585271 142.1632 0 0 1.752146,-1.36091 l 0.841223,-1.25897 z" id="path4" fill="none" stroke="#291717" strokeWidth={0.0296333} strokeLinejoin="round" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill" />
+          </g>
+          <text xmlSpace="preserve" x={-144.96733} y={115.66841} id="text36" transform="rotate(-66.697527)" className="livros-style-107" opacity={1} fill="url(#linearGradient13)" fillOpacity={1} stroke="#000000" strokeWidth={0.0264583} strokeLinejoin="bevel" strokeDasharray="none" strokeOpacity={1} paintOrder="markers stroke fill">
+            <tspan id="tspan36" x={-144.96733} y={115.66841} className="livros-style-108" fill="url(#linearGradient13)" fillOpacity={1} strokeWidth={0.0264583}>
+              {"Romance"}
+            </tspan>
+          </text>
+        </g></motion.g>
+  </>
+);

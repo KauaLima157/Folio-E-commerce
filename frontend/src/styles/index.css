@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 :root {
   /* Design Tokens - Palette (Dark Mode by default for premium feel) */
   --bg-primary: #0a0b10;
@@ -38,6 +40,29 @@
   
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Original animated section theme variables */
+  --color-primary: #D46025;
+  --color-primary-hover: #F29E21;
+  --color-background: #FDFCFE;
+  --color-background-alt: #F0EDE6;
+  --color-text-main: #0F1828;
+  --color-text-muted: #303D55;
+  --color-white: #FFFFFF;
+
+  /* Typography */
+  --font-heading-animated: 'Playfair Display', serif;
+  --font-body-animated: 'DM Sans', sans-serif;
+
+  /* Font Sizes */
+  --text-hero: 72px;
+  --text-h1: 40px;
+  --text-h2: 32px;
+  --text-h3: 24px;
+  --text-body-large: 22px;
+  --text-body: 18px;
+  --text-caption: 16px;
+  --text-small: 14px;
 }
 
 /* Light Mode alternative (optional, overrides if system is in light mode) */
@@ -72,8 +97,8 @@
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--color-background-alt);
+  color: var(--color-text-main);
   overflow-x: hidden;
   line-height: 1.5;
   transition: background-color var(--transition-normal);
@@ -154,6 +179,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.5px;
   background: var(--accent-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -296,6 +322,7 @@ body {
 
 .hero-title span {
   background: var(--accent-gradient);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -568,6 +595,7 @@ body {
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
