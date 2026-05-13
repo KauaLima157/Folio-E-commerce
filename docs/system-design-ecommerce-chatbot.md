@@ -1,0 +1,499 @@
+# 🧠 System Design Document — E-commerce com Chatbot IA
+
+> **Documento de planejamento técnico completo** para um sistema de e-commerce com chatbot integrado.  
+> Antes de escrever qualquer linha de código, responda as perguntas de cada camada.
+
+---
+
+## Índice
+
+1. [Problema e Objetivo do Sistema](#1-problema-e-objetivo-do-sistema)
+2. [Escopo do MVP](#2-escopo-do-mvp)
+3. [Requisitos Funcionais](#3-requisitos-funcionais)
+4. [Requisitos Não Funcionais](#4-requisitos-não-funcionais)
+5. [Arquitetura do Sistema](#5-arquitetura-do-sistema)
+6. [Modelagem de Dados](#6-modelagem-de-dados)
+7. [Banco de Dados](#7-banco-de-dados)
+8. [Integração com IA](#8-integração-com-ia)
+9. [Fluxo de Mensagens do Chatbot](#9-fluxo-de-mensagens-do-chatbot)
+10. [Segurança](#10-segurança)
+11. [Observabilidade](#11-observabilidade)
+12. [Design do Sistema Visual](#12-design-do-sistema-visual)
+13. [Experiência do Usuário (UX)](#13-experiência-do-usuário-ux)
+14. [Limitações do Sistema](#14-limitações-do-sistema)
+15. [Deploy e Infraestrutura](#15-deploy-e-infraestrutura)
+16. [Evolução Futura](#16-evolução-futura)
+
+---
+
+## 1. Problema e Objetivo do Sistema
+
+> Antes de projetar qualquer sistema, entenda **o que ele precisa resolver**.
+
+| # | Pergunta |
+|---|----------|
+| 1 | Qual é o objetivo principal do sistema? |
+É um e-commerce de livros com chatbot integrado com IA. o projelo é um trabalho da faculdade que também servirá de aprendizado. a ideia é utilizar POO e um chatbot inteligente que, nesse caso, irá auxiliar o usuário na compra de livros, respondendo dúvidas acerca dos produtos ou sobre o funcionamento do site.
+| 2 | Quem são os usuários do sistema? |
+Os usuários do sistema são clientes que desejam comprar livros.
+| 3 | Qual problema o chatbot resolve dentro do e-commerce? |
+O chatbot resolve o problema de dúvidas sobre produtos e funcionamento do site.
+| 4 | O chatbot é apenas suporte ou também recomenda produtos? |
+O chatbot é apenas suporte.
+| 5 | O usuário precisa estar logado para usar o chatbot? |
+O usuário precisa estar logado para usar o chatbot.
+| 6 | O chatbot deve responder apenas sobre produtos ou também sobre pedidos? |
+O chatbot deve responder apenas sobre produtos. talvez, se algum dia o projeto for extendido, há a possibilidade de transformar o chatbot em um verdadeiro assistente pessoal, guidando o usuário em toda a jornada de compra.
+| 7 | O sistema será usado por uma única loja ou várias lojas? |
+A ideia é criar algo "único", então, por enquanto, apenas uma loja. mas, no futuro, há a possibilidade de transformar o sistema em uma plataforma para várias lojas.
+| 8 | O projeto será apenas um MVP educacional ou pretende evoluir depois? |
+O projeto será apenas um MVP educacional, mas com a possibilidade de evoluir para algo maior.
+
+---
+
+## 2. Escopo do MVP
+
+> Defina o que **entra** e o que **não entra** no MVP.
+
+| # | Pergunta |
+|---|----------|
+| 1 | Quais funcionalidades mínimas o e-commerce terá? *(listar produtos, ver produto, carrinho, pedido)* |
+Ver produtos(página própria), carrinho, pedido, checkout. 
+| 2 | O sistema terá autenticação de usuários? |
+Sim, o usuário precisará estar logado para usar o sistema.
+| 3 | Haverá integração com pagamento? |
+Talvez, mas não é uma prioridade.
+| 4 | O chatbot deve conseguir responder sobre produtos, recomendar produtos e consultar pedidos? |
+O chatbot deve conseguir responder sobre como usar o site(FAQ)
+| 5 | O chatbot precisa manter histórico de conversa? |
+Sim, o chatbot precisa manter histórico de conversa.
+| 6 | O chatbot será visível em todas as páginas ou apenas em algumas? |
+O chatbot será visível em todas as páginas.
+
+---
+
+## 3. Requisitos Funcionais
+
+> O que o sistema **deve fazer**.
+
+### 🛍️ Catálogo
+
+| # | Pergunta |
+|---|----------|
+| 1 | O usuário pode ver todos os produtos? |
+Sim, o usuário pode ver todos os produtos.
+| 2 | O usuário pode buscar produtos? |
+não
+| 3 | O usuário pode filtrar produtos? |
+não 
+
+### 🛒 Carrinho
+
+| # | Pergunta |
+|---|----------|
+| 4 | O usuário pode adicionar produto ao carrinho? |
+Sim, o usuário pode adicionar produto ao carrinho.
+| 5 | O usuário pode remover produtos do carrinho? |
+Sim, o usuário pode remover produtos do carrinho.
+
+### 📦 Pedido
+
+| # | Pergunta |
+|---|----------|
+| 6 | O usuário pode finalizar um pedido? |
+Sim, o usuário pode finalizar um pedido.
+| 7 | O sistema salva histórico de pedidos? |
+Sim, o sistema salva histórico de pedidos.
+
+### 🤖 Chatbot
+
+| # | Pergunta |
+|---|----------|
+| 8 | O chatbot pode responder dúvidas sobre produtos? |
+não, ao menos por enquanto
+| 9 | O chatbot pode mostrar produtos? |
+não, ao menos por enquanto
+| 10 | O chatbot pode informar status do pedido? |
+Não, o chatbot não pode informar status do pedido.
+
+
+
+---
+
+## 4. Requisitos Não Funcionais
+
+> Requisitos de **qualidade** do sistema.
+
+| # | Pergunta |
+|---|----------|
+| 1 | Quantos usuários simultâneos o sistema precisa suportar? |
+Não sei, mas não deve ser muito, já que é um projeto de faculdade.
+| 2 | O tempo de resposta do chatbot precisa ser rápido? |
+Sim, o chatbot precisa ser rápido.
+| 3 | O sistema precisa ser escalável? |
+Não, o sistema não precisa ser escalável.
+| 4 | O sistema precisa ser altamente disponível? |
+Não, o sistema não precisa ser altamente disponível.
+| 5 | Existe preocupação com custo de API de IA? |
+Sim, o custo da API de IA é uma preocupação, embora eu utilizarei uma que tem um limite de requisições gratuitas alto(gemini).
+| 6 | O sistema precisa armazenar logs das conversas? |
+não agora 
+| 7 | O sistema precisa proteger dados do usuário? |
+Sim, o sistema precisa proteger dados do usuário.
+
+> 💡 **Para um MVP educacional, normalmente:**
+> - **Escala:** baixa
+> - **Disponibilidade:** média
+> - **Performance:** razoável
+
+---
+
+## 5. Arquitetura do Sistema
+
+> A **estrutura técnica** do sistema.
+
+| # | Pergunta |
+|---|----------|
+| 1 | O sistema será monolítico ou microserviços? |
+O sistema será monolítico, visto que é um projeto de faculdade e não há necessidade de microserviços.(daria mais trabalho do que o necessário)
+| 2 | O chatbot será um módulo ou um serviço separado? |
+O chatbot será um módulo do sistema.
+| 3 | O backend terá camadas bem definidas? |
+Sim, o backend terá camadas bem definidas.
+| 4 | O frontend será uma SPA? |
+Sim, o frontend será uma SPA.
+| 5 | A comunicação será via REST ou WebSocket? |
+Sim, a comunicação será via REST.
+
+### Diagrama de Arquitetura Geral:
+
+```
+┌─────────────┐        ┌──────────────┐        ┌──────────────┐
+│   Frontend  │ ──────▶│   Backend    │ ──────▶│  Banco de │
+│  React SPA  │        │  Node.js API │        │    Dados │
+└─────────────┘        └──────┬───────┘        └──────────────┘
+                              │
+                              ▼
+                       ┌──────────────┐
+                       │  AI Provider │
+                       │ (OpenAI/etc) │
+                       └──────────────┘
+```
+
+---
+
+## 6. Modelagem de Dados
+
+> As **entidades** do sistema e seus relacionamentos.
+
+| # | Pergunta |
+|---|----------|
+| 1 | Quais são as entidades principais do sistema? |
+User, Address, Product, Order, OrderItem, CartItem (persistente) e ChatMessage.
+| 2 | Quais atributos cada entidade terá? |
+A entidade User terá nome e telefone. Address abrigará os campos locais. Product terá arrays de strings para autores e gêneros. OrderItem guardará um snapshot do produto no momento da compra.
+| 3 | Como os relacionamentos funcionarão? |
+1:N para User -> Address, User -> Order, Order -> OrderItem, User -> CartItem e User -> ChatMessage.
+| 4 | O histórico de chat será salvo? |
+Sim. Numa mesma tabela relacionando a sessão, o usuário logado e, caso aja, o ID do produto recomendado pela IA.
+| 5 | A sessão de conversa terá um identificador? |
+Sim, utilizaremos um session_id gerado no front-end para agrupar as mensagens na mesma conversa, sem precisar de uma tabela de controle de sessão à parte.
+| 6 | O carrinho é persistente? |
+Sim, os itens do carrinho são salvos no banco de dados para permitir a continuidade da compra entre dispositivos e sessões.
+
+### Entidades principais:
+
+```
+User
+ ├── id
+ ├── name
+ ├── email
+ ├── password_hash
+ ├── phone
+ └── created_at
+
+Address
+ ├── id
+ ├── user_id
+ ├── street
+ ├── number
+ ├── complement
+ ├── neighborhood
+ ├── city
+ ├── state
+ ├── zip_code
+ └── is_default
+
+Product
+ ├── id
+ ├── title
+ ├── description
+ ├── authors (Array/String)
+ ├── genres (Array/String)
+ ├── price
+ ├── stock
+ └── is_active
+
+Order
+ ├── id
+ ├── user_id
+ ├── address_snapshot (Texto completo do endereço no momento da compra)
+ ├── total_price_snapshot (Preço total fixado no momento do checkout)
+ ├── status (PENDENTE, PAGO, ENVIADO, CANCELADO)
+ └── created_at
+
+OrderItem
+ ├── id
+ ├── order_id
+ ├── product_id
+ ├── product_name_snapshot
+ ├── product_price_snapshot (Preço unitário fixado no momento da compra)
+ ├── quantity
+ └── subtotal
+
+CartItem (Novo)
+ ├── id
+ ├── user_id
+ ├── product_id
+ ├── quantity
+ └── added_at
+
+ChatMessage
+ ├── id
+ ├── user_id
+ ├── session_id
+ ├── role (user | assistant)
+ ├── content
+ ├── recommended_product_id
+ └── created_at
+```
+
+### Relacionamentos:
+
+```
+User ──── 1:N ──── Addresses
+User ──── 1:N ──── Orders
+Order ─── 1:N ──── OrderItems
+Seller ── 1:N ──── Products
+User ──── 1:N ──── CartItems
+User ──── 1:N ──── ChatMessages (por sessão)
+
+* Cart persistente no DB para usuários logados.
+```
+
+---
+
+## 7. Banco de Dados
+
+| # | Pergunta |
+|---|----------|
+| 1 | Qual banco de dados será usado? |
+PostgreSQL
+| 2 | Os dados são mais relacionais ou documentos? |
+Relacionais
+| 3 | O catálogo de produtos terá muitas variações? |
+Não
+| 4 | O histórico de chat será armazenado? |
+Sim
+| 5 | O banco precisa suportar busca textual? |
+Sim
+
+---
+
+## 8. Integração com IA
+
+> Parte **essencial** para o projeto.
+
+| # | Pergunta |
+|---|----------|
+| 1 | Qual provedor de IA será usado? *(OpenAI, Anthropic, Gemini…)* |
+Gemini
+| 2 | O chatbot usará apenas LLM direto ou LLM + ferramentas (tools/functions)? |
+LLM + ferramentas
+| 3 | O chatbot pode acessar dados do banco? |
+Sim
+| 4 | O chatbot deve usar contexto de conversa? |
+Sim
+| 5 | O chatbot deve usar prompt fixo ou dinâmico? |
+O chatbot usará um prompt fixo, mas com contexto dinâmico: prompt + regras + histórico + dados do usuário + dados de ferramentas.
+
+### 🛡️ Ferramentas (AI Tools/Functions):
+O Chatbot terá acesso às seguintes capacidades para auxiliar na compra:
+- `list_products(genre?)`: Lista produtos disponíveis, opcionalmente filtrados por gênero (conforme as seções do Figma).
+- `get_product_details(id)`: Retorna detalhes completos de um livro específico.
+- `search_books(query)`: Busca textual por títulos ou autores (Machado de Assis, etc).
+- `check_inventory(id)`: Valida se o livro está disponível em estoque.
+- `get_user_cart()`: Permite ao bot saber o que o usuário já tem interesse em comprar.
+
+### 🧠 Estratégias de Chatbot Avançado:
+Para garantir uma experiência de compra fluida e focada, as seguintes regras devem ser implementadas no Prompt do Sistema:
+
+1. **Detecção de Fora de Escopo (Out-of-Scope Detection):**
+   - O chatbot deve recusar educadamente responder a perguntas que não envolvam livros, autores, gêneros ou o funcionamento do e-commerce. (Ex: previsões do tempo, receitas, política). Ele sempre deve redirecionar o foco para o catálogo.
+
+2. **Recomendação por Similaridade (Handling Missing Books):**
+   - Se o usuário solicitar um livro (ex: "Harry Potter") que **não** existe no catálogo (`search_books` retornou vazio), o bot não deve dar uma resposta negativa curta. 
+   - A IA deve usar seu conhecimento interno para identificar o **gênero/estilo** do livro solicitado e então sugerir livros **similares que estão disponíveis** na loja. 
+   - *Exemplo de Fluxo:* Usuário pede "Livro X" (vazio) -> IA identifica que é "Misterio" -> IA chama `list_products(genre="Misterio")` -> IA responde: "No momento não temos o Livro X, mas como você gosta de mistério, temos estes disponíveis..."
+
+---
+
+## 9. Fluxo de Mensagens do Chatbot
+
+| # | Pergunta |
+|---|----------|
+| 1 | Como a mensagem do usuário chega ao backend? |
+O usuário digita uma mensagem no front-end, que é enviada para o backend via REST.
+| 2 | Como o backend processa essa mensagem? |
+O backend recebe a mensagem, busca o contexto do usuário e envia para a IA.
+| 3 | Como a IA recebe contexto? |
+A IA recebe o contexto do usuário e envia para o backend.
+| 4 | Como a resposta é gerada? |
+A IA gera a resposta e envia para o backend.
+| 5 | O sistema salva a conversa antes ou depois da resposta? |
+depois da resposta(caso não haja erro)
+
+### Fluxo típico:
+
+```
+Usuário digita mensagem
+        │
+        ▼
+  Frontend (React)
+        │  POST /chat
+        ▼
+  Chat Controller
+        │
+        ▼
+  Chat Service ──── busca contexto do banco ────▶ DB
+        │
+        ▼
+  AI Provider (Gemini) ─── identifica intenção (intents/tools)
+        │ 
+        ▼
+  Executa Ferramenta (ex: list_products) ──────▶ DB/Service
+        │
+        ▼
+  Salva mensagem no banco ──────────────────────▶ DB
+        │
+        ▼
+  Retorna resposta ao frontend
+        │
+        ▼
+  Exibe mensagem no chat 
+```
+
+---
+
+## 10. Segurança
+
+| # | Pergunta |
+|---|----------|
+| 1 | O chatbot pode ser usado sem login? |
+não
+| 2 | Como evitar spam no chat? |
+limitar o número de mensagens por usuário por minuto
+| 3 | Como evitar prompt injection? |
+validar as entradas do usuário(utilizar regras que limitem o prompt)
+| 4 | O sistema valida entradas do usuário? |
+sim
+| 5 | O sistema limita chamadas à API de IA? *(rate limiting)* |
+sim, utilizando um contador de mensagens por usuário por minuto
+
+---
+
+## 11. Observabilidade
+
+> Mesmo em um MVP, é bom pensar nisso.
+
+| # | Pergunta |
+|---|----------|
+| 1 | O sistema terá logs? |
+sim, utilizando o pino e quero adicionar logs com nível de severidade
+| 2 | O sistema registra erros do chatbot? |
+sim, porém somente como log
+| 3 | O sistema registra conversas? |
+sim, porém com um certo limite(apagar de tempos em tempos)
+| 4 | O sistema mede tempo de resposta da IA? |
+talvez, não é uma prioridade no momento
+
+---
+
+## 12. Experiência do Usuário (UX)
+
+| # | Pergunta |
+|---|----------|
+| 1 | O chatbot será um widget flutuante? |
+| 2 | O chat mostra histórico de mensagens? |
+| 3 | O bot mostra sugestões rápidas? |
+| 4 | O usuário pode clicar em produtos sugeridos pelo bot? |
+
+---
+
+## 13. Limitações do Sistema
+
+| # | Pergunta |
+|---|----------|
+| 1 | O chatbot pode cometer erros? |
+Sim. Caso ele cometa erros, ele deve se desculpar e tentar novamente
+| 2 | Como lidar com perguntas que ele não sabe responder? |
+Ele deve se desculpar e sugerir que o usuário entre em contato com o suporte humano
+| 3 | O chatbot deve encaminhar para suporte humano? |
+Não
+sim, porém ele deve apenas sugerir que o usuário entre em contato com o suporte humano em casos muito específicos
+---
+
+## 14. Deploy e Infraestrutura
+
+| # | Pergunta |
+|---|----------|
+| 1 | Onde o backend será hospedado? *(Railway, Render, AWS…)* |
+Render (plano gratuito Free Web Service).
+| 2 | Onde o banco ficará? *(Supabase, PlanetScale, Atlas…)* |
+Supabase (oferece PostgreSQL robusto no Free Tier).
+| 3 | O frontend será hospedado separadamente? *(Vercel, Netlify…)* |
+Vercel (plano Hobby, gratuito e otimizado para front-end).
+| 4 | Como serão armazenadas as variáveis de ambiente? |
+Nas configurações de ambiente das próprias plataformas (Render e Vercel), sem expor chaves no repositório.
+| 5 | O sistema terá CI/CD? |
+Sim, os deploys serão automáticos a cada push na branch principal (integração nativa do repositório com Vercel e Render).
+
+---
+
+## 15. Evolução Futura
+
+> Mesmo sendo MVP, pense no futuro.
+
+| # | Pergunta |
+|---|----------|
+| 1 | O sistema poderá suportar múltiplas lojas? |
+sim, porém não no MVP
+| 2 | O chatbot poderá aprender com as conversas? |
+talvez
+| 3 | O sistema poderá integrar com WhatsApp? |
+sim, porém não no MVP
+| 4 | O chatbot poderá usar embeddings e RAG? |
+sim, porém não no MVP
+
+---
+
+## ✅ Estrutura Final do Plano Técnico
+
+Após responder todas as perguntas acima, seu documento de design estará estruturado assim:
+
+```
+1. Objetivo do sistema
+2. Escopo do MVP
+3. Requisitos funcionais
+4. Requisitos não funcionais
+5. Arquitetura do sistema
+6. Modelagem de dados
+7. Integração com IA
+8. Fluxo do chatbot
+9. Segurança
+10. Infraestrutura
+11. Evoluções futuras
+```
+
+
+

@@ -1,0 +1,90 @@
+/* ExploreSection.css */
+
+.explore-container {
+  position: relative;
+  width: 1440px;
+  height: 1024px;
+  background: var(--color-background-alt);
+  overflow: hidden; /* To prevent elements from spilling out if scaled */
+  margin: 0 auto; /* Center it */
+}
+
+.explore-text-explorar {
+  position: absolute;
+  width: 115px;
+  height: 29px;
+  left: 142px;
+  top: 74px;
+  font-family: var(--font-heading-animated);
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--text-body-large);
+  line-height: 29px;
+  color: var(--color-primary);
+}
+
+.explore-text-navegue {
+  position: absolute;
+  width: 365px;
+  height: 53px;
+  left: 142px;
+  top: 129px;
+  font-family: var(--font-heading-animated);
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--text-h1);
+  line-height: 53px;
+  color: var(--color-text-main);
+}
+
+.explore-text-clique {
+  position: absolute;
+  width: 465px;
+  height: 86px;
+  left: 142px;
+  top: 203px;
+  font-family: var(--font-body-animated);
+  font-style: normal;
+  font-weight: 700;
+  font-size: var(--text-body-large);
+  line-height: 29px;
+  color: var(--color-text-muted);
+}
+
+.explore-livros-gato {
+  position: absolute;
+  width: 1191.7px;
+  height: 745.37px;
+  left: 142px;
+  top: 280px;
+}
+
+/* --- ANIMAÇÃO DE RESPIRAÇÃO --- */
+@keyframes breathing {
+  0% {
+      transform: scale(1) translateY(0);
+  }
+  50% {
+      /* O gato "incha" ligeiramente e sobe 1 pixel */
+      transform: scale(1.020) translateY(-0.8px);
+  }
+  100% {
+      transform: scale(1) translateY(0);
+  }
+}
+
+/* Aplicando a animação ao corpo */
+#corpo-respiracao {
+  animation: breathing 4s ease-in-out infinite;
+  /* Definimos a origem da transformação na base do gato */
+  transform-origin: center bottom;
+  transform-box: fill-box;
+}
+
+/* Aplicando uma animação ligeiramente diferente à cabeça para parecer mais natural */
+#cabeca {
+  animation: breathing 4s ease-in-out infinite;
+  animation-delay: 0.1s; /* Um pequeno atraso para fluidez */
+  transform-origin: left bottom;
+  transform-box: fill-box;
+}

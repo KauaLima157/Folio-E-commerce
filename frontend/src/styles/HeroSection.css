@@ -1,0 +1,351 @@
+.hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 1024px;
+  margin: 0 auto;
+  background-color: var(--color-background-alt);
+  overflow: hidden;
+  font-family: var(--font-body-animated);
+}
+
+/* Decorative Assets */
+.hero-asset {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bola-fundo-livro {
+  top: 154px;
+  left: 600px; 
+  width: 580px; 
+  height: 590px;
+  z-index: 0;
+}
+
+.bola-vazia {
+  top: 667px;
+  left: 1152px;
+  width: 144px;
+  height: 134px;
+}
+
+.bola-cheia {
+  top: 99px;
+  left: 1066px;
+  width: 84px;
+  height: 78px;
+}
+
+.triangulo {
+  top: 174px;
+  left: 72px; /* Original Figma pos was 72px, let's stick to it */
+  width: 90px;
+  height: 92px;
+  z-index: 1;
+}
+
+.onda {
+  top: 920px;
+  left: 850px;
+  width: 150px;
+  height: 85px;
+  opacity: 0.25;
+}
+
+.plus {
+  top: 228px;
+  left: 310px; /* Moved slightly more to the right of Bestsellers */
+  width: 32px;
+  height: 32px;
+}
+
+.arranhado {
+  top: 569px;
+  left: 72px;
+  width: 120px;
+  height: 126px;
+}
+
+.estrelas {
+  top: 240px; /* A bit lower than 220, but higher than 280 */
+  left: 540px; 
+  width: 146px;
+  height: 100px;
+}
+
+.sublinhado {
+  top: 450px;
+  left: 72px;
+  width: 100px;
+  height: 20px;
+}
+
+/* HEADER */
+.hero-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 64px;
+  height: 121px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.folio-text {
+  font-family: var(--font-heading-animated);
+  font-size: var(--text-h1);
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -1px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link-pill {
+  text-decoration: none;
+  font-size: var(--text-caption);
+  color: var(--color-text-main);
+  font-weight: 500;
+  padding: 10px 28px;
+  border-radius: 100px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-link-pill.active {
+  background-color: #E2EDE9; /* Light grey-green pill for Home */
+}
+
+/* Specific style for Login button (second pill) */
+.nav-link-pill:nth-child(2) {
+  border: 1px solid #999; /* Light border as in screenshot */
+  color: var(--color-text-muted);
+}
+
+.nav-btn-primary {
+  text-decoration: none;
+  font-size: var(--text-caption);
+  color: var(--color-white);
+  background-color: var(--color-primary); /* Orange as in design_system */
+  padding: 12px 32px;
+  border-radius: 100px;
+  font-weight: 700;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-btn-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+}
+
+/* MAIN CONTENT */
+.hero-main {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 72px;
+  height: calc(1024px - 121px);
+}
+
+.hero-content {
+  position: relative;
+  flex: 0 0 600px;
+  padding-top: 72px; /* Visual alignment */
+}
+
+.bestsellers-tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading-animated);
+  font-size: var(--text-h2);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 24px;
+  margin-top: 48px;
+  position: relative;
+  z-index: 2;
+}
+
+.bestsellers-tag span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.plus-icon {
+  margin-top: 8px;
+}
+
+.hero-title-group {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.hero-title-group h1 {
+  font-family: var(--font-heading-animated);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.sublinhado-img {
+  position: absolute;
+  top: 154px; 
+  left: 0;
+  width: 80%;
+}
+
+.hero-subtitle {
+  font-size: var(--text-body);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 64px;
+  max-width: 393px;
+}
+
+.explore-btn-area {
+  position: relative;
+}
+
+.btn-explore {
+  display: inline-block;
+  text-decoration: none;
+  font-size: var(--text-body);
+  color: var(--color-white);
+  background-color: var(--color-primary);
+  padding: 18px 40px;
+  border-radius: 12px;
+  font-weight: 700;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s;
+}
+
+.arranhado-img {
+  position: absolute;
+  top: -80px;
+  left: -20px;
+  z-index: 1;
+}
+
+/* VISUALS & FLOATING BOOKS */
+.hero-visuals {
+  position: absolute;
+  top: 0;
+  left: 538px;
+  width: 902px; /* 1440 - 538 */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-book-cover {
+  width: 460px; /* Made larger */
+  height: 600px; /* Made larger */
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
+
+.book-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 32px 64px rgba(15, 24, 40, 0.2));
+}
+
+.floating-bubble {
+  position: absolute;
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 16px 32px rgba(15, 24, 40, 0.08);
+  z-index: 10;
+  animation: float 6s ease-in-out infinite;
+}
+
+.bubble-left {
+  top: 10%;
+  left: -40px;
+  animation-delay: 0s;
+}
+
+.bubble-right {
+  bottom: 15%;
+  right: 60px;
+  animation-delay: -3s;
+}
+
+.bubble-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.bubble-book-icon {
+  width: 55px;
+  height: 79px;
+  background: var(--color-primary);
+  border-radius: 4px;
+}
+
+.bubble-book-icon.alt {
+  background: var(--color-text-main);
+}
+
+.bubble-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bubble-text .category {
+  font-size: var(--text-small);
+  color: var(--color-primary);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.bubble-text .title {
+  font-size: var(--text-body);
+  color: var(--color-text-main);
+  font-weight: 700;
+}
+
+.bubble-text .author {
+  font-size: var(--text-small);
+  color: var(--color-text-muted);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
