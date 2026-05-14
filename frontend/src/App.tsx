@@ -1,14 +1,13 @@
-import { BrowserRouter } from 'react-router-dom';
-import { ChatWidget } from './components/ChatWidget';
-import { AppRoutes } from './routes';
-import './styles/App.css';
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+import { ChatWidget } from "./components/ChatWidget";
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
+    <>
+      <RouterProvider router={router} />
       <ChatWidget />
-    </BrowserRouter>
+    </>
   );
 }
 

@@ -30,9 +30,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
           </div>
         </div>
         <nav className="header-nav">
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('home'); }} className="nav-link-pill active">Home</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('login'); }} className="nav-link-pill">Login</a>
-          <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('register'); }} className="nav-btn-primary">Criar conta &rarr;</a>
+          <a href="/" onClick={(e) => { e.preventDefault(); onNavigate('/'); }} className="nav-link-pill active">Home</a>
+          <a href="/auth/login" onClick={(e) => { e.preventDefault(); onNavigate('/auth/login'); }} className="nav-link-pill">Login</a>
+          <a href="/auth/register" onClick={(e) => { e.preventDefault(); onNavigate('/auth/register'); }} className="nav-btn-primary">Criar conta &rarr;</a>
           <div className="cart-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>

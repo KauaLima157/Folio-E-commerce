@@ -1,12 +1,32 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Home } from '../pages/Home';
+import { createBrowserRouter } from "react-router-dom";
 
-export const AppRoutes: React.FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="*" element={<Home />} />
-    </Routes>
-  );
-};
+import { PublicLayout } from "../layouts/publicLayout";
+import { PrivateLayout } from "../layouts/privateLayout";
+
+import { Home } from "../pages/Home";
+import { Login } from "../pages/Login";
+import { Register } from "../pages/Register";
+
+export const router = createBrowserRouter([
+  {
+    element: <PublicLayout />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/auth/login", element: <Login /> },
+      { path: "/auth/register", element: <Register /> },
+    ],
+  },
+
+  {
+    element: <PrivateLayout />,
+    children: [
+      // { path: "/user/profile", element: <Profile /> },
+      // { path: "/user/profile/:id", element: <Profile /> },
+    ],
+  },
+
+  {
+    path: "*",
+    element: <h1>404 Not Found</h1>,
+  },
+]);
