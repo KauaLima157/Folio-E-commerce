@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { Footer } from "../pages/Footer";
 
 export function PublicLayout() {
   return (
@@ -8,9 +9,7 @@ export function PublicLayout() {
         <Outlet />
       </main>
 
-      <footer className="footer">
-        <small>Todos os direitos reservados</small>
-      </footer>
+      <Footer/>
     </div>
   );
 }
