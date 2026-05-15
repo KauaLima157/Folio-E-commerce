@@ -8,8 +8,13 @@ interface User {
 export interface AuthContextInterface {
   user: User | null;
   token: string | null;
+  loading: boolean;
+
   profile: () => Promise<void>;
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextInterface | null>(null);
+export const AuthContext =
+  createContext<AuthContextInterface | null>(
+    null
+  );

@@ -3,6 +3,7 @@ import { Inputs } from "./Inputs.js";
 import { Submit } from "./Submit.js";
 import { AuthService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hook/authHook";
 
 const authService = new AuthService();
 
@@ -85,7 +86,9 @@ export function FormRegister() {
 }
 
 export function FormLogin() {
+  const { profile } = useAuth();
   const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -94,28 +97,37 @@ export function FormLogin() {
   const [error, setError] = useState("");
   
   const handleSubmit = async (e: React.SyntheticEvent<HTMLFormElement>) => {
-    e.preventDefault();
+     e.preventDefault();
 
-    setSuccess("Login realizado com sucesso!");
-    setLoading(true);
-    setError("");
+  setLoading(true);
+  setError("");
+  setSuccess("");
 
-    try {
-      const response = await authService.login(email, password);
+  try {
+    const response =
+      await authService.login(
+        email,
+        password
+      );
 
-      localStorage.setItem("token", JSON.stringify(response.token))
+    localStorage.setItem(
+      "token",
+      JSON.stringify(response.token)
+    );
 
-      console.log("Login feito: ", response);
+    await profile();
 
-      setTimeout(() => {
-        navigate("/");
-      }, 1000);
-    } catch (error: any) {
-      setError(error.message);
-      setSuccess("Problemas ao acessar conta");
-    } finally {
-      setLoading(false);
-    }
+    setSuccess(
+      "Login realizado com sucesso!"
+    );
+
+    navigate("/");
+
+  } catch (error: any) {
+    setError(error.message);
+  } finally {
+    setLoading(false);
+  }
   };
 
   return (

@@ -1,5 +1,3 @@
-
-
 export const Cat = () => (
   <g id="gato" transform="matrix(0.22569648,0,0,0.23527157,111.15357,130.04776)">
         <g id="corpo-respiracao">

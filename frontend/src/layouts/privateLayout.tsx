@@ -1,23 +1,37 @@
-import { Navigate, Outlet } from "react-router-dom";
+import {
+  Navigate,
+  Outlet,
+} from "react-router-dom";
+
+import { Footer } from "../pages/Footer";
+
+import { useAuth }
+from "../hook/authHook";
 
 export function PrivateLayout() {
-  const isAuth = false; 
 
-  if (!isAuth) {
-    return <Navigate to="/auth/login" replace />;
+  const {
+    user,
+  } = useAuth();
+
+  if (!user) {
+    return (
+      <Navigate
+        to="/auth/login"
+        replace
+      />
+    );
   }
 
   return (
-    <div>
-      {/* header do usuário etc */}
+    <div className="private-layout">
 
-      <header>
-        <h2>Área do Usuário</h2>
-      </header>
-
-      <main>
+      <main className="content-private">
         <Outlet />
       </main>
+
+      <Footer />
+
     </div>
   );
 }

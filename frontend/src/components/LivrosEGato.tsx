@@ -60,8 +60,8 @@ const SvgLivrosegatocompleto: React.FC<SvgLivrosegatocompletoProps> = (props) =>
         </div>
       )}
       <svg 
-        width="123.81144mm" 
-        height="72.504982mm" 
+        width="200.81144mm" 
+        height="152.504982mm" 
         viewBox="0 0 123.81144 72.504982" 
         id="svg1" 
         xmlSpace="preserve" 
