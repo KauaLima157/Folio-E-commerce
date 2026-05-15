@@ -1,18 +1,12 @@
-import {
-  Navigate,
-  Outlet,
-} from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { Footer } from "../pages/Footer";
 
-import { useAuth }
-from "../hook/authHook";
+import { useAuth } from "../hook/authHook";
 
 export function PrivateLayout() {
 
-  const {
-    user,
-  } = useAuth();
+  const { user } = useAuth();
 
   if (!user) {
     return (

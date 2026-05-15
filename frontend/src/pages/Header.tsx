@@ -52,7 +52,6 @@ export function Header() {
       </div>
 
       <nav className="header-nav">
-
         <Link
           to="/"
           className="nav-link-pill active"
@@ -64,7 +63,6 @@ export function Header() {
           <ProfileMenu />
         ) : (
           <>
-
             <Link
               to="/auth/login"
               className="nav-link-pill"
@@ -78,7 +76,6 @@ export function Header() {
             >
               Criar conta →
             </Link>
-
           </>
         )}
 

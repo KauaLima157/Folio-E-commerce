@@ -11,11 +11,7 @@ interface User {
   email: string;
 }
 
-export function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const [user, setUser] =
     useState<User | null>(null);
@@ -27,9 +23,7 @@ export function AuthProvider({
     useState(true);
 
   const profile = async () => {
-
-    const storedToken =
-      localStorage.getItem("token");
+    const storedToken = localStorage.getItem("token");
 
     if (!storedToken) {
       setLoading(false);
@@ -37,18 +31,14 @@ export function AuthProvider({
     }
 
     try {
-
       const res = await fetch(
         "http://localhost:3001/api/auth/profile",
         {
           headers: {
-            Authorization: `Bearer ${JSON.parse(
-              storedToken
-            )}`,
+            Authorization: `Bearer ${JSON.parse( storedToken )}`,
           },
         }
       );
-
       const data = await res.json();
 
       setUser(data.user);
@@ -56,24 +46,15 @@ export function AuthProvider({
       setToken(storedToken);
 
     } catch (err) {
-
-      console.error(err);
-
       logout();
-
     } finally {
-
       setLoading(false);
-
     }
   };
 
   const logout = () => {
-
     setUser(null);
-
     setToken(null);
-
     localStorage.removeItem("token");
   };
 

@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { X, Send, Sparkles } from 'lucide-react';
 import { api } from '../services/api';
 import '../styles/ChatWidget.css';
+import { useAuth } from '../hook/authHook';
+import toast from 'react-hot-toast';
 
 interface ChatMessage {
   sender: 'user' | 'bot';
@@ -17,6 +19,7 @@ export function ChatWidget() {
   const [isTyping, setIsTyping] = useState(false);
   
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const { user } = useAuth();
 
   useEffect(() => {
     // Get or generate session ID
@@ -96,13 +99,21 @@ export function ChatWidget() {
   return (
     <>
       {/* Floating Trigger Button (Switches icon dynamically between Sparkles and X) */}
-      <button 
-        className="chat-float-trigger" 
-        onClick={() => setIsOpen(!isOpen)} 
+      <button
+        className={`chat-float-trigger ${!user ? 'shake' : ''}`}
+          onClick={() => {
+            if (!user) {
+              toast.error("Você precisa estar logado para usar o chatbot");
+              return;
+            }
+
+            setIsOpen(!isOpen);
+          }}
         aria-label="Falar com Assistente IA"
       >
         {isOpen ? <X size={24} /> : <Sparkles />}
       </button>
+
 
       {/* Floating Mini Chat Modal */}
       <div className={`chat-mini-modal ${isOpen ? 'open' : ''}`}>

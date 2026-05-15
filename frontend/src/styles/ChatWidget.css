@@ -19,6 +19,19 @@
   animation: breathe 3s infinite alternate;
 }
 
+.chat-float-trigger.shake {
+  animation: shake 1.5s infinite;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+  100% { transform: translateX(0); }
+}
+
 .chat-float-trigger:hover {
   transform: scale(1.08) rotate(5deg);
   box-shadow: 0 12px 40px rgba(168, 85, 247, 0.6), 0 0 0 6px rgba(168, 85, 247, 0.25);
@@ -43,7 +56,7 @@
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
   display: flex;
   flex-direction: column;
-  z-index: 1001;
+  z-index: 9999;
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px) scale(0.95);
