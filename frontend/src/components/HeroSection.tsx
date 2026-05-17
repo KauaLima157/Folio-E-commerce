@@ -114,15 +114,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         <div className="hero-visuals">
           <div className="main-book-cover">
             <img
-              src="dist/assets/heroSection/morte-de-ivanilitch.svg"
-              alt="Liev Tolstói"
+              src="/dist/assets/heroSection/morte-de-ivanilitch.svg"
+              alt="Ivan Ilitch"
               className="book-image02"
             />
           </div>
 
           <div className="floating-bubble bubble-left">
             <div className="bubble-content">
-              <div className="bubble-book-icon"></div>
+              <img
+                  src="dist/assets/heroSection/memorias-postumas.svg"
+                  alt="Machado de Assis"
+                  className="bubble-book-icon.alt"
+                />
+
 
               <div className="bubble-text">
                 <span className="category">
@@ -134,7 +139,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 </span>
 
                 <span className="author">
-                  Machado de Assis
+                  Brás Cubas
                 </span>
               </div>
             </div>
@@ -156,7 +161,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 </span>
               </div>
 
-              <div className="bubble-book-icon alt"></div>
+                <img
+                  src="dist/assets/heroSection/cartomante.svg"
+                  alt="Machado de Assis"
+                  className="bubble-book-icon.alt"
+                />
             </div>
           </div>
         </div>
@@ -173,7 +182,7 @@ const HeroSection02: React.FC<HeroSectionProps> = ({ onNavigate }) => {
       <img
         src="/dist/assets/heroSection/bola-fundo-livro-marrom.svg"
         alt=""
-        className="hero-asset bola-fundo-livro-marrom"
+        className="hero-asset bola-fundo-livro"
       />
 
       <img
@@ -278,7 +287,12 @@ const HeroSection02: React.FC<HeroSectionProps> = ({ onNavigate }) => {
 
           <div className="floating-bubble bubble-left">
             <div className="bubble-content">
-              <div className="bubble-book-icon"></div>
+              <img
+                  src="dist/assets/heroSection/memorias-postumas.svg"
+                  alt="Machado de Assis"
+                  className="bubble-book-icon.alt"
+                />
+
 
               <div className="bubble-text">
                 <span className="category">
@@ -286,11 +300,11 @@ const HeroSection02: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 </span>
 
                 <span className="title">
-                  A Metamorfose
+                  Memórias Póstumas
                 </span>
 
                 <span className="author">
-                  Franz Kafka
+                  Brás Cubas
                 </span>
               </div>
             </div>
@@ -312,7 +326,11 @@ const HeroSection02: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 </span>
               </div>
 
-              <div className="bubble-book-icon alt"></div>
+                <img
+                  src="dist/assets/heroSection/cartomante.svg"
+                  alt="Machado de Assis"
+                  className="bubble-book-icon.alt"
+                />
             </div>
           </div>
         </div>
@@ -328,7 +346,7 @@ const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
       <img
         src="/dist/assets/heroSection/bola-fundo-livro-azul.svg"
         alt=""
-        className="hero-asset bola-fundo-livro-marrom"
+        className="hero-asset bola-fundo-livro"
       />
 
       <img
@@ -425,15 +443,20 @@ const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         <div className="hero-visuals">
           <div className="main-book-cover">
             <img
-              src="/dist/assets/heroSection/dom-casmurro_500_sem_fundo.png"
+              src="/dist/assets/heroSection/dom-casmurro_500_sem_fundo.svg"
               alt="Machado De Assis"
-              className="book-image"
+              className="book-image02"
             />
           </div>
 
           <div className="floating-bubble bubble-left">
             <div className="bubble-content">
-              <div className="bubble-book-icon"></div>
+              <img
+                  src="dist/assets/heroSection/memorias-postumas.svg"
+                  alt="Machado de Assis"
+                  className="bubble-book-icon.alt"
+                />
+
 
               <div className="bubble-text">
                 <span className="category">
@@ -441,11 +464,11 @@ const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 </span>
 
                 <span className="title">
-                  A Metamorfose
+                  Memórias Póstumas
                 </span>
 
                 <span className="author">
-                  Franz Kafka
+                  Brás Cubas
                 </span>
               </div>
             </div>
@@ -467,7 +490,11 @@ const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 </span>
               </div>
 
-              <div className="bubble-book-icon alt"></div>
+                <img
+                  src="dist/assets/heroSection/cartomante.svg"
+                  alt="Machado de Assis"
+                  className="bubble-book-icon.alt"
+                />
             </div>
           </div>
         </div>

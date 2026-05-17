@@ -61,7 +61,7 @@ export const Home: React.FC = () => {
   return (
     <div className="app-container">
 
-      {heroSections[2]}
+      {heroSections[index]}
 
       <div className="slider-dots">
         {[0, 1, 2].map((item) => (

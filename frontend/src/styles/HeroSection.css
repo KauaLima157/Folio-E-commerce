@@ -39,10 +39,10 @@
 }
 
 .triangulo {
-  top: 174px;
+  top: 95px;
   left: 72px; /* Original Figma pos was 72px, let's stick to it */
-  width: 90px;
-  height: 92px;
+  width: 75px;
+  height: 75px;
   z-index: 1;
 }
 
@@ -205,7 +205,7 @@
   font-family: var(--font-heading-animated);
   font-size: var(--text-hero);
   font-weight: 700;
-  color: #F0EDE6;
+  color: #1E1E1E;
   line-height: 1;
   margin-bottom: 55px;
   position: relative;
@@ -277,8 +277,8 @@
 }
 
 .book-image {
-  width: 101%;
-  height: 101%;
+  width: 100%;
+  height: 70%;
   object-fit: contain;
   filter: drop-shadow(0 32px 64px rgba(15, 24, 40, 0.2));
 }
@@ -294,15 +294,16 @@
 }
 
 .bubble-left {
-  top: 10%;
+  bottom: 35%;
   left: -40px;
   animation-delay: 0s;
 }
 
 .bubble-right {
-  bottom: 15%;
+  top: 35%;
   right: 60px;
   animation-delay: -3s;
+  
 }
 
 .bubble-content {
@@ -316,11 +317,14 @@
   height: 79px;
   background: var(--color-primary);
   border-radius: 4px;
+  
 }
 
 .bubble-book-icon.alt {
   background: var(--color-text-main);
+  
 }
+
 
 .bubble-text {
   display: flex;

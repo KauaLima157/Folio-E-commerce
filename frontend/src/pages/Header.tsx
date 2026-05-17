@@ -254,7 +254,7 @@ export function Header02() {
 
             <Link
               to="/auth/register"
-              className="nav-btn-primary"
+              className="nav-btn-primary2"
             >
               Criar conta →
             </Link>
