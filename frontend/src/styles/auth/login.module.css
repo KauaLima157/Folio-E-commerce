@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
@@ -34,27 +35,112 @@
 .backButton {
   position: absolute;
   top: 20px;
-  left: 20px;
-  background: transparent;
-  border: none;
-  font-size: 16px;
+  left: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+
+  background: #fff;
+  color: #111827;
+
   cursor: pointer;
-  color: #333;
-  transition: 0.2s;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+
+  transition: 0.2s ease;
 }
 
 .backButton:hover {
-  opacity: 0.7;
+  transform: translateX(-4px);
+  background: #f9fafb;
+}
+
+.backButton:hover {
+  transform: translateX(-4px);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 @media (max-width: 956px) {
   .container {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     padding: 40px 20px;
     gap: 40px;
   }
 
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+  }
+
   .right img {
     max-width: 300px;
+  }
+}
+
+.registerRedirect {
+  margin-top: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.registerRedirect button {
+  border: none;
+  background: transparent;
+
+  color: #2563eb;
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.registerRedirect button:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.fadeUp {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.fadeDown {
+  animation: fadeDown 0.8s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
