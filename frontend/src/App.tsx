@@ -13,7 +13,6 @@ function App() {
           zIndex: 999999,
         }}
       />
-
       <RouterProvider router={router} />
       <ChatWidget />
     </AuthProvider>
