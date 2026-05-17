@@ -4,7 +4,6 @@ import "../styles/HeroSection.css";
 import "../styles/HeroSection02.css";
 import "../styles/HeroSection03.css";
 
-
 interface HeroSectionProps {
   onNavigate: (page: string) => void;
 }
@@ -16,7 +15,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
     
       {/* DECORATIVE ASSETS */}
           <img
-        src="/dist/assets/heroSection/bola-fundo-livro-azul.svg"
+        src="/dist/assets/heroSection/bola-fundo-livro-branco.svg"
         alt=""
         className="hero-asset bola-fundo-livro"
       />
@@ -77,7 +76,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
             </h1>
 
             <img
-              src="/assets/heroSection/sublinhado.svg"
+              src="dist/assets/heroSection/sublinhado.svg"
               alt=""
               className="sublinhado-img"
             />
@@ -115,9 +114,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         <div className="hero-visuals">
           <div className="main-book-cover">
             <img
-              src="/assets/heroSection/dom-casmurro_500_sem_fundo.png"
-              alt="Dom Casmurro"
-              className="book-image"
+              src="dist/assets/heroSection/morte-de-ivanilitch.svg"
+              alt="Liev Tolstói"
+              className="book-image02"
             />
           </div>
 
@@ -165,6 +164,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
     </section>
   );
 };
+
 {/* HeroSection02 */}
 const HeroSection02: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   return (
@@ -320,12 +320,13 @@ const HeroSection02: React.FC<HeroSectionProps> = ({ onNavigate }) => {
     </section>
   );
 };
+
 const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
   return (
     <section className="hero-container03">
        {/* DECORATIVE ASSETS */}
       <img
-        src="/dist/assets/heroSection/bola-fundo-livro-marrom.svg"
+        src="/dist/assets/heroSection/bola-fundo-livro-azul.svg"
         alt=""
         className="hero-asset bola-fundo-livro-marrom"
       />
@@ -369,30 +370,30 @@ const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
       {/* MAIN CONTENT */}
       <main className="hero-main">
         <div className="hero-content">
-          <div className="bestsellers-tag03">
+          <div className="bestsellers-tag">
             <span>
               &mdash; Bestsellers
             </span>
           </div>
 
-          <div className="hero-title-group03">
+          <div className="hero-title-group">
             <h1>
               Encontre seu
               <br />
 
-              <span className="italic-serif03">
+              <span className="italic-serif">
                 Próximo livro
               </span>
             </h1>
 
             <img
-              src="dist/assets/heroSection/sublinhado-amarelo.svg"
+              src="dist/assets/heroSection/sublinhado.svg"
               alt=""
-              className="sublinhado03-img"
+              className="sublinhado-img"
             />
           </div>
 
-          <p className="hero-subtitle03">
+          <p className="hero-subtitle">
             Uma seleção cuidadosa de
             títulos que expandem
             horizontes. Cada página,
@@ -424,9 +425,9 @@ const HeroSection03: React.FC<HeroSectionProps> = ({ onNavigate }) => {
         <div className="hero-visuals">
           <div className="main-book-cover">
             <img
-              src="/dist/assets/heroSection/franz-kafka-metamorfose.svg"
-              alt="Franz Kafka"
-              className="book-image02"
+              src="/dist/assets/heroSection/dom-casmurro_500_sem_fundo.png"
+              alt="Machado De Assis"
+              className="book-image"
             />
           </div>
 

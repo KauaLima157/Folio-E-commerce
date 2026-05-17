@@ -75,13 +75,6 @@
   height: 100px;
 }
 
-.sublinhado {
-  top: 450px;
-  left: 72px;
-  width: 100px;
-  height: 20px;
-}
-
 /* HEADER */
 .hero-header2 {
   position: relative;
@@ -173,7 +166,7 @@
   padding-top: 72px; /* Visual alignment */
 }
 
-.bestsellers-tag {
+.bestsellers-tag02 {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -197,7 +190,7 @@
   margin-top: 8px;
 }
 
-.hero-title-group0 {
+.hero-title-group {
   position: relative;
   margin-bottom: 40px;
 }
@@ -208,16 +201,16 @@
   font-weight: 700;
   color: #F0EDE6;
   line-height: 1;
-  margin: 0;
+  margin-bottom: 50px;
   position: relative;
   z-index: 2;
 }
 .italic-serif02 {
   color: #C87820;
 }
-.sublinhado-img {
+.sublinhado02-img {
   position: absolute;
-  top: 154px; 
+  top: 340px; 
   left: 0;
   width: 80%;
 }

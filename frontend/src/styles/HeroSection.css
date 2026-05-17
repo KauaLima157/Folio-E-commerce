@@ -205,9 +205,9 @@
   font-family: var(--font-heading-animated);
   font-size: var(--text-hero);
   font-weight: 700;
-  color: var(--color-text-main);
+  color: #F0EDE6;
   line-height: 1;
-  margin: 0;
+  margin-bottom: 55px;
   position: relative;
   z-index: 2;
 }
@@ -220,12 +220,11 @@
   left: 0;
   width: 80%;
 }
-
-.hero-subtitle {
+.hero-subtitle  {
   font-size: var(--text-body);
   color: #8A7A60;
   line-height: 1.5;
-  margin-bottom: 64px;
+  margin-bottom: 60px;
   max-width: 393px;
 }
 
