@@ -1,6 +1,6 @@
 .slider-dots {
   position: absolute;
-  top: 900px;
+  bottom: 40px;
   left: 45%;
   display: flex;
   align-items: center;
@@ -23,4 +23,22 @@
 .dot.active {
   width: 48px;
   background: #d88916;
+}
+
+@media (max-width: 768px) {
+  .slider-dots {
+    display: none !important;
+  }
+}
+
+.hero-section-wrapper {
+  position: relative;
+  min-height: 1024px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .hero-section-wrapper {
+    min-height: auto;
+  }
 }

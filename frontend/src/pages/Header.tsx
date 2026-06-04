@@ -5,17 +5,10 @@ import style from "../styles/header.module.css";
 import { useAuth } from "../hook/authHook";
 
 // header 01
-export function Header() {
+export function Header({ onOpenCart }: { onOpenCart?: () => void }) {
 
   const { user } = useAuth();
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  const handleEventClick = () => {
-      setIsActive(true);
-  }
-  const handleCloseCart = () => {
-      setIsActive(false);
-  }
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="hero-header">
@@ -53,10 +46,16 @@ export function Header() {
         </div>
       </div>
 
-      <nav className="header-nav">
-        <Link to="/" className="nav-link-pill active">
-          Home
-        </Link>
+      <div className="mobile-menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
+        ☰
+      </div>
+
+      {menuOpen && <div className="sidebar-overlay" onClick={() => setMenuOpen(false)}></div>}
+
+      <nav className={`header-nav ${menuOpen ? 'open' : ''}`}>
+        <button className="mobile-close-btn" onClick={() => setMenuOpen(false)}>
+          &times;
+        </button>
 
         {user ? (
           <ProfileMenu />
@@ -64,7 +63,8 @@ export function Header() {
           <>
             <Link
               to="/auth/login"
-              className="nav-link-pill"
+              className="btn-login"
+              onClick={() => setMenuOpen(false)}
             >
               Login
             </Link>
@@ -72,14 +72,15 @@ export function Header() {
             <Link
               to="/auth/register"
               className="nav-btn-primary"
+              onClick={() => setMenuOpen(false)}
             >
               Criar conta →
             </Link>
           </>
         )}
 
-        <div className="cart-icon">
-          <button className={style.buttonCart} onClick={handleEventClick}>
+        <div className="cart-icon desktop-only">
+          <button className={style.buttonCart} onClick={onOpenCart}>
               <svg
                 width="24"
                 height="24"
@@ -104,101 +105,15 @@ export function Header() {
               </svg>
           </button>
         </div>
-
-       {isActive && (
-          <div className={style.cartOverlay} onClick={handleCloseCart}>
-            <div className={style.cartModal}>
-
-              <div className={style.cartHeader}>
-                <div>
-                  <span className={style.cartSubtitle}>
-                    Minha sacola
-                  </span>
-
-                  <h2>Seus Livros</h2>
-                </div>
-
-                <button
-                  className={style.closeBtn}
-                  onClick={handleCloseCart}
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className={style.cartItems}>
-
-                <div className={style.cartItem}>
-                  <div className={`${style.bookCover} ${style.blue}`} />
-
-                  <div className={style.bookContent}>
-                    <span className={style.category}>
-                      Literatura
-                    </span>
-
-                    <h3>Dom Casmurro</h3>
-
-                    <p>Machado de Assis</p>
-
-                    <div className={style.itemFooter}>
-                      <strong>R$ 39,90</strong>
-
-                      <div className={style.quantity}>
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className={style.cartFooter}>
-
-                <div className={style.summary}>
-                  <div>
-                    <span>Subtotal</span>
-                    <strong>R$ 39,90</strong>
-                  </div>
-
-                  <div>
-                    <span>Entrega</span>
-                    <strong>Grátis</strong>
-                  </div>
-                </div>
-
-                <div className={style.total}>
-                  <span>Total</span>
-                  <h3>R$ 39,90</h3>
-                </div>
-
-                <button className={style.checkoutBtn}>
-                  Finalizar compra →
-                </button>
-
-              </div>
-
-            </div>
-          </div>
-        )}
       </nav>
     </header>
   );
 }
 
 // header 02
-export function Header02() {
+export function Header02({ onOpenCart }: { onOpenCart?: () => void }) {
 
   const { user } = useAuth();
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  const handleEventClick = () => {
-      setIsActive(true);
-  }
-  const handleCloseCart = () => {
-      setIsActive(false);
-  }
 
   return (
     <header className="hero-header2">
@@ -237,9 +152,6 @@ export function Header02() {
       </div>
 
       <nav className="header-nav2">
-        <Link to="/" className="nav-link-pill2 active">
-          Home
-        </Link>
 
         {user ? (
           <ProfileMenu />
@@ -247,7 +159,7 @@ export function Header02() {
           <>
             <Link
               to="/auth/login"
-              className="nav-link-pill"
+              className="btn-login2"
             >
               Login
             </Link>
@@ -262,13 +174,13 @@ export function Header02() {
         )}
 
         <div className="cart-icon2">
-          <button className={style.buttonCart} onClick={handleEventClick}>
+          <button className={style.buttonCartDark} onClick={onOpenCart}>
               <svg
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#F0EDE6"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -287,101 +199,15 @@ export function Header02() {
               </svg>
           </button>
         </div>
-
-       {isActive && (
-          <div className={style.cartOverlay} onClick={handleCloseCart}>
-            <div className={style.cartModal}>
-
-              <div className={style.cartHeader}>
-                <div>
-                  <span className={style.cartSubtitle}>
-                    Minha sacola
-                  </span>
-
-                  <h2>Seus Livros</h2>
-                </div>
-
-                <button
-                  className={style.closeBtn}
-                  onClick={handleCloseCart}
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className={style.cartItems}>
-
-                <div className={style.cartItem}>
-                  <div className={`${style.bookCover} ${style.blue}`} />
-
-                  <div className={style.bookContent}>
-                    <span className={style.category}>
-                      Literatura
-                    </span>
-
-                    <h3>Dom Casmurro</h3>
-
-                    <p>Machado de Assis</p>
-
-                    <div className={style.itemFooter}>
-                      <strong>R$ 39,90</strong>
-
-                      <div className={style.quantity}>
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className={style.cartFooter}>
-
-                <div className={style.summary}>
-                  <div>
-                    <span>Subtotal</span>
-                    <strong>R$ 39,90</strong>
-                  </div>
-
-                  <div>
-                    <span>Entrega</span>
-                    <strong>Grátis</strong>
-                  </div>
-                </div>
-
-                <div className={style.total}>
-                  <span>Total</span>
-                  <h3>R$ 39,90</h3>
-                </div>
-
-                <button className={style.checkoutBtn}>
-                  Finalizar compra →
-                </button>
-
-              </div>
-
-            </div>
-          </div>
-        )}
       </nav>
     </header>
   );
 }
 
 // header 03
-export function Header03() {
+export function Header03({ onOpenCart }: { onOpenCart?: () => void }) {
 
   const { user } = useAuth();
-  const [isActive, setIsActive] = useState<boolean>(false);
-
-  const handleEventClick = () => {
-      setIsActive(true);
-  }
-  const handleCloseCart = () => {
-      setIsActive(false);
-  }
 
   return (
     <header className="hero-header3">
@@ -420,9 +246,6 @@ export function Header03() {
       </div>
 
       <nav className="header-nav3">
-        <Link to="/" className="nav-link-pill3 active">
-          Home
-        </Link>
 
         {user ? (
           <ProfileMenu />
@@ -430,7 +253,7 @@ export function Header03() {
           <>
             <Link
               to="/auth/login"
-              className="nav-link-pill"
+              className="btn-login3"
             >
               Login
             </Link>
@@ -445,13 +268,13 @@ export function Header03() {
         )}
 
         <div className="cart-icon2">
-          <button className={style.buttonCart} onClick={handleEventClick}>
+          <button className={style.buttonCart} onClick={onOpenCart}>
               <svg
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
                 fill="none"
-                stroke="#000000"
+                stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -470,84 +293,6 @@ export function Header03() {
               </svg>
           </button>
         </div>
-
-       {isActive && (
-          <div className={style.cartOverlay} onClick={handleCloseCart}>
-            <div className={style.cartModal}>
-
-              <div className={style.cartHeader}>
-                <div>
-                  <span className={style.cartSubtitle}>
-                    Minha sacola
-                  </span>
-
-                  <h2>Seus Livros</h2>
-                </div>
-
-                <button
-                  className={style.closeBtn}
-                  onClick={handleCloseCart}
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className={style.cartItems}>
-
-                <div className={style.cartItem}>
-                  <div className={`${style.bookCover} ${style.blue}`} />
-
-                  <div className={style.bookContent}>
-                    <span className={style.category}>
-                      Literatura
-                    </span>
-
-                    <h3>Dom Casmurro</h3>
-
-                    <p>Machado de Assis</p>
-
-                    <div className={style.itemFooter}>
-                      <strong>R$ 39,90</strong>
-
-                      <div className={style.quantity}>
-                        <button>-</button>
-                        <span>1</span>
-                        <button>+</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-              <div className={style.cartFooter}>
-
-                <div className={style.summary}>
-                  <div>
-                    <span>Subtotal</span>
-                    <strong>R$ 39,90</strong>
-                  </div>
-
-                  <div>
-                    <span>Entrega</span>
-                    <strong>Grátis</strong>
-                  </div>
-                </div>
-
-                <div className={style.total}>
-                  <span>Total</span>
-                  <h3>R$ 39,90</h3>
-                </div>
-
-                <button className={style.checkoutBtn}>
-                  Finalizar compra →
-                </button>
-
-              </div>
-
-            </div>
-          </div>
-        )}
       </nav>
     </header>
   );

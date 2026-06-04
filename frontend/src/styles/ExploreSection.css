@@ -53,10 +53,15 @@
 
 .explore-livros-gato {
   position: absolute;
-  width: 1191.7px;
-  height: 745.37px;
-  left: 142px;
-  top: 280px;
+  width: 1300px;
+  height: 680px;
+  left: 70px;
+  top: 290px;
+}
+
+.explore-livros-gato svg {
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* --- ANIMAÇÃO DE RESPIRAÇÃO --- */
@@ -87,4 +92,10 @@
   animation-delay: 0.1s; /* Um pequeno atraso para fluidez */
   transform-origin: left bottom;
   transform-box: fill-box;
+}
+
+@media (max-width: 768px) {
+  .explore-container {
+    display: none !important;
+  }
 }

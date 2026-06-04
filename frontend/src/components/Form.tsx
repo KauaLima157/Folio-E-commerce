@@ -35,7 +35,7 @@ export function FormRegister() {
 
     } catch (error: any) {
       setError(error.message);
-      setSuccess("Problemas ao criar conta");
+      setSuccess("");
     } finally {
       setLoading(false);
     }

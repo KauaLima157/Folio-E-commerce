@@ -8,8 +8,11 @@ export const validate =
     const result = schema.safeParse(req.body);
 
     if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      const firstError = Object.values(fieldErrors).flatMap(e => e)[0];
       return res.status(400).json({
-        errors: result.error.flatten().fieldErrors
+        message: firstError || "Erro de validação",
+        errors: fieldErrors
       });
     }
 
