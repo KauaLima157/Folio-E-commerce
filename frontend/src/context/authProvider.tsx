@@ -11,6 +11,12 @@ interface User {
   email: string;
 }
 
+let BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+BASE_URL = BASE_URL.replace(/\/+$/, '');
+if (!BASE_URL.endsWith('/api')) {
+  BASE_URL = `${BASE_URL}/api`;
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const [user, setUser] =
@@ -32,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const res = await fetch(
-        "http://localhost:3001/api/auth/profile",
+        `${BASE_URL}/auth/profile`,
         {
           headers: {
             Authorization: `Bearer ${JSON.parse( storedToken )}`,
