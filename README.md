@@ -31,6 +31,7 @@ Este projeto tem fins educacionais (MVP) focando na aplicação de Programação
 - **`src/store/`**: Gerenciamento global local (States/Contexts).
 - **`src/components/`**: Componentes da interface limpos e isolados da parte lógica severa.
 - **`src/pages/`**: Reunião de componentes que figuram como telas acessíveis por rota.
+- **`src/routes/`**: Configuração e gerenciamento das rotas e navegação da aplicação.
 
 ### `/docs`
 - Documentação primária do sistema, detalhamentos de fluxo, roadmap e diagramas de design.

@@ -1,10 +1,23 @@
-import { ChatWidget } from './components/ChatWidget';
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+
+import { AuthProvider } from "./context/authProvider";
+import { CartProvider } from "./context/CartContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
-    <>
-      <ChatWidget />
-    </>
+    <AuthProvider>
+      <CartProvider>
+        <Toaster
+          position="top-right"
+          containerStyle={{
+            zIndex: 999999,
+          }}
+        />
+        <RouterProvider router={router} />
+      </CartProvider>
+    </AuthProvider>
   );
 }
 

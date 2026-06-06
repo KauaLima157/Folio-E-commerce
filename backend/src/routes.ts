@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { 
-  PrismaUserRepository, 
   PrismaProductRepository, 
   PrismaChatRepository, 
   PrismaCartRepository 
@@ -11,7 +10,6 @@ import { ProductController } from './controllers/ProductController';
 
 const routes = Router();
 
-const userRepository = new PrismaUserRepository();
 const productRepository = new PrismaProductRepository();
 const chatRepository = new PrismaChatRepository();
 const cartRepository = new PrismaCartRepository();
