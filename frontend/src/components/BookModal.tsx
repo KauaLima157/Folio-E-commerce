@@ -82,6 +82,18 @@ export default function BookModal({ genreId, isOpen, onClose }: BookModalProps) 
 
   if (!renderData && !isOpen) return null;
 
+  const handleSubGenreClick = () => {
+    onClose();
+    if (genreId) {
+      setTimeout(() => {
+        const targetElement = document.getElementById(`genre-${genreId}`);
+        if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 300);
+    }
+  };
+
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if ((e.target as HTMLElement).classList.contains('modal-overlay')) {
       onClose();
@@ -129,7 +141,7 @@ export default function BookModal({ genreId, isOpen, onClose }: BookModalProps) 
                     key={index} 
                     className="sub-item" 
                     style={{ animationDelay: `${index * 55}ms` } as CSSProperties}
-                    onClick={onClose}
+                    onClick={handleSubGenreClick}
                   >
                     <div>
                       <div className="sub-name">{subItem.n}</div>

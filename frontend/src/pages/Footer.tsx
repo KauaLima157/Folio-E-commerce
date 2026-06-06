@@ -1,6 +1,5 @@
 import {
   MessageCircle,
-  ArrowRight,
 } from "lucide-react";
 
 import style from "../styles/footer.module.css";

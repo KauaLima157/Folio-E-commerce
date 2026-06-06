@@ -85,6 +85,12 @@
     max-width: 300px;
   }
 }
+
+@media (max-width: 768px) {
+  .right {
+    display: none;
+  }
+}
 .loginRedirect {
   margin-top: 24px;
 

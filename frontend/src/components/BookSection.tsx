@@ -1,14 +1,17 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/BookSection.css';
-import { api } from '../services/api';
-import { useCart } from '../context/CartContext';
+import { api, getBookCoverImage } from '../services/api';
 
 const colors = ['#87CEEB', '#D2B48C', '#FFA07A', '#778899', '#FFD700'];
 
-const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
+const GenreSection = ({ title, id, offset }: { title: string, id: string, offset: number }) => {
+  const navigate = useNavigate();
   const rowRef = useRef<HTMLDivElement>(null);
+  const dragStartXRef = useRef(0);
+  const dragStartYRef = useRef(0);
+  
   const [books, setBooks] = useState<any[]>([]);
-  const { addToCart } = useCart();
   
   useEffect(() => {
     const fetchBooks = async () => {
@@ -21,7 +24,8 @@ const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
           price: `R$ ${Number(p.price).toFixed(2).replace('.', ',')}`,
           rawPrice: Number(p.price),
           genre: title.toUpperCase(),
-          color: colors[(index + offset) % colors.length]
+          color: colors[(index + offset) % colors.length],
+          coverImage: getBookCoverImage(p.title)
         }));
         setBooks(formattedBooks);
       } catch (error) {
@@ -35,6 +39,7 @@ const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+  const [hasMoved, setHasMoved] = useState(false);
 
   const scroll = (direction: 'left' | 'right') => {
     if (rowRef.current) {
@@ -47,34 +52,60 @@ const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
+    dragStartXRef.current = e.pageX;
+    dragStartYRef.current = e.pageY;
     setStartX(e.pageX - (rowRef.current?.offsetLeft || 0));
     setScrollLeft(rowRef.current?.scrollLeft || 0);
+    setHasMoved(false);
   };
 
   const handleMouseLeave = () => {
     setIsDragging(false);
+    setHasMoved(false);
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (hasMoved) {
+      e.preventDefault();
+    }
+    // Delay resetting so navigation can proceed if it was a click
+    setTimeout(() => {
+      setIsDragging(false);
+      setHasMoved(false);
+    }, 50);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging || !rowRef.current) return;
-    e.preventDefault();
+    if (!rowRef.current) return;
     const x = e.pageX - rowRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
-    rowRef.current.scrollLeft = scrollLeft - walk;
+    
+    // Only drag if the mouse moved more than 5px
+    if (Math.abs(x - startX) > 5) {
+      setIsDragging(true);
+      setHasMoved(true);
+      e.preventDefault();
+      rowRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  const handleCardClick = (e: React.MouseEvent, bookId: string) => {
+    const distanceX = Math.abs(e.pageX - dragStartXRef.current);
+    const distanceY = Math.abs(e.pageY - dragStartYRef.current);
+    
+    // If user dragged more than 8 pixels, prevent navigation
+    if (distanceX > 8 || distanceY > 8) {
+      e.preventDefault();
+      return;
+    }
+    
+    navigate(`/book/${bookId}`);
   };
 
   return (
-    <div className="genre-section">
+    <div className="genre-section" id={id}>
       <div className="genre-header">
         <h2 className="genre-title">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="var(--terracotta)" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-          </svg>
           {title}
         </h2>
         <div className="genre-arrows">
@@ -92,9 +123,24 @@ const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
       >
         {books.map(book => (
-          <div key={book.id} className="book-card" style={{ pointerEvents: isDragging ? 'none' : 'auto' }}>
-            <div className="book-cover" style={{ background: book.color }}>
-              <span className="book-cover-title">{book.title}</span>
+          <div 
+            key={book.id} 
+            className="book-card" 
+            onClick={(e) => handleCardClick(e, book.id)}
+            style={{ 
+              textDecoration: 'none',
+              color: 'inherit'
+            }}
+          >
+            <div className={`book-cover ${book.coverImage ? 'has-cover' : ''}`} style={{ background: book.color }}>
+              {book.coverImage ? (
+                <img src={book.coverImage} alt={book.title} className="book-cover-img" />
+              ) : (
+                <>
+                  <div className="book-cover-spine"></div>
+                  <span className="book-cover-title">{book.title}</span>
+                </>
+              )}
             </div>
             <div className="book-info">
               <span className="book-genre">{book.genre}</span>
@@ -102,12 +148,6 @@ const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
               <p className="book-author">{book.author}</p>
               <div className="book-price-row">
                 <span className="book-price">{book.price}</span>
-                <button 
-                  className="book-add-btn" 
-                  onClick={() => addToCart({ id: book.id, title: book.title, price: book.rawPrice })}
-                >
-                  +
-                </button>
               </div>
             </div>
           </div>
@@ -120,12 +160,12 @@ const GenreSection = ({ title, offset }: { title: string, offset: number }) => {
 export const BookSection: React.FC = () => {
   return (
     <div className="book-section-container">
-      <GenreSection title="Literatura" offset={0} />
-      <GenreSection title="Romance" offset={10} />
-      <GenreSection title="Poesia" offset={20} />
-      <GenreSection title="Fantasia" offset={30} />
-      <GenreSection title="Filosofia" offset={40} />
-      <GenreSection title="Ficção Científica" offset={50} />
+      <GenreSection title="Literatura" id="genre-classica" offset={0} />
+      <GenreSection title="Romance" id="genre-romance" offset={10} />
+      <GenreSection title="Poesia" id="genre-poesia" offset={20} />
+      <GenreSection title="Fantasia" id="genre-fantasia" offset={30} />
+      <GenreSection title="Filosofia" id="genre-filosofia" offset={40} />
+      <GenreSection title="Ficção Científica" id="genre-ficcao" offset={50} />
     </div>
   );
 };

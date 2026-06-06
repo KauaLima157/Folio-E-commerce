@@ -86,6 +86,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  .right {
+    display: none;
+  }
+}
+
 .registerRedirect {
   margin-top: 24px;
 

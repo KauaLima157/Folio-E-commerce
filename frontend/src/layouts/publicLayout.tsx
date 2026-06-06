@@ -15,7 +15,7 @@ export function PublicLayout() {
         <Outlet />
       </main>
 
-      <Footer/>
+      {!isAuthPage && <Footer/>}
       
       {!isAuthPage && <ChatWidget />}
     </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, Send, Sparkles } from 'lucide-react';
-import { api } from '../services/api';
+import { api, getBookCoverImage } from '../services/api';
 import '../styles/ChatWidget.css';
 import { useAuth } from '../hook/authHook';
+import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 interface ChatMessage {
@@ -17,21 +18,90 @@ export function ChatWidget() {
   const [sessionId, setSessionId] = useState('');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [isTyping, setIsTyping] = useState(false);
+  const [allProducts, setAllProducts] = useState<any[]>([]);
   
   const chatEndRef = useRef<HTMLDivElement>(null);
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Get or generate session ID
-    let sessId = localStorage.getItem('folio_session_id');
+    const fetchAllProducts = async () => {
+      try {
+        const products = await api.getProducts();
+        setAllProducts(products);
+      } catch (error) {
+        console.error('Error fetching products in chat:', error);
+      }
+    };
+    fetchAllProducts();
+  }, []);
+
+  const getMentionedBooks = (text: string) => {
+    const mentioned: any[] = [];
+    const textLower = text.toLowerCase();
+    
+    allProducts.forEach(prod => {
+      const titleLower = prod.title.toLowerCase();
+      // Check if title is mentioned (either in bold markdown or as plain text)
+      if (textLower.includes(titleLower) || textLower.includes(`**${titleLower}**`)) {
+        // Avoid duplicates
+        if (!mentioned.some(m => m.id === prod.id)) {
+          mentioned.push(prod);
+        }
+      }
+    });
+    return mentioned;
+  };
+
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftState, setScrollLeftState] = useState(0);
+  const [hasDragged, setHasDragged] = useState(false);
+
+  const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    setIsMouseDown(true);
+    setStartX(e.pageX - target.offsetLeft);
+    setScrollLeftState(target.scrollLeft);
+    setHasDragged(false);
+  };
+
+  const handleDragLeave = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleDragEnd = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isMouseDown) return;
+    e.preventDefault();
+    const target = e.currentTarget;
+    const x = e.pageX - target.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(walk) > 5) {
+      setHasDragged(true);
+    }
+    target.scrollLeft = scrollLeftState - walk;
+  };
+
+  useEffect(() => {
+    if (!user) {
+      setSessionId('');
+      setMessages([]);
+      return;
+    }
+
+    const userKey = user.id;
+    let sessId = localStorage.getItem(`folio_session_id_${userKey}`);
     if (!sessId) {
-      sessId = `folio-sess-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('folio_session_id', sessId);
+      sessId = `folio-sess-${userKey}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem(`folio_session_id_${userKey}`, sessId);
     }
     setSessionId(sessId);
 
-    // Initial chat history or welcome message
-    const savedMessages = localStorage.getItem(`folio_chat_${sessId}`);
+    const savedMessages = localStorage.getItem(`folio_chat_${userKey}_${sessId}`);
     if (savedMessages) {
       setMessages(JSON.parse(savedMessages));
     } else {
@@ -42,14 +112,14 @@ export function ChatWidget() {
       };
       setMessages([welcomeMsg]);
     }
-  }, []);
+  }, [user]);
 
   // Save chat history locally
   useEffect(() => {
-    if (sessionId && messages.length > 0) {
-      localStorage.setItem(`folio_chat_${sessionId}`, JSON.stringify(messages));
+    if (user && sessionId && messages.length > 0) {
+      localStorage.setItem(`folio_chat_${user.id}_${sessionId}`, JSON.stringify(messages));
     }
-  }, [messages, sessionId]);
+  }, [messages, sessionId, user]);
 
   // Scroll to bottom
   useEffect(() => {
@@ -76,7 +146,7 @@ export function ChatWidget() {
     setIsTyping(true);
 
     try {
-      const responseText = await api.sendMessage(currentMessage, sessionId);
+      const responseText = await api.sendMessage(currentMessage, sessionId, user?.id || 'usuario-teste-1');
       const botMsg: ChatMessage = {
         sender: 'bot',
         text: responseText,
@@ -140,6 +210,45 @@ export function ChatWidget() {
               <div className="chat-bubble" style={{ whiteSpace: 'pre-line' }}>
                 {msg.text}
               </div>
+
+              {/* Mentioned books clickable carousel/cards */}
+              {msg.sender === 'bot' && (() => {
+                const books = getMentionedBooks(msg.text);
+                if (books.length === 0) return null;
+                const isDraggable = books.length > 2;
+                return (
+                  <div 
+                    className={`chat-mentioned-books ${isDraggable ? 'draggable' : ''}`}
+                    onMouseDown={isDraggable ? handleDragStart : undefined}
+                    onMouseLeave={isDraggable ? handleDragLeave : undefined}
+                    onMouseUp={isDraggable ? handleDragEnd : undefined}
+                    onMouseMove={isDraggable ? handleDragMove : undefined}
+                  >
+                    {books.map(b => {
+                      const cover = getBookCoverImage(b.title);
+                      if (!cover) return null;
+                      return (
+                        <div 
+                          key={b.id} 
+                          className="chat-book-card"
+                          onClick={() => {
+                            if (isDraggable && hasDragged) return; // ignore click if dragged
+                            setIsOpen(false); // Close chat widget
+                            navigate(`/book/${b.id}`); // Navigate to book detail page
+                          }}
+                        >
+                          <img src={cover} alt={b.title} className="chat-book-cover" />
+                          <div className="chat-book-info">
+                            <span className="chat-book-title">{b.title}</span>
+                            <span className="chat-book-author">{b.authors[0]}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+
               <span className="chat-time">{msg.time}</span>
             </div>
           ))}

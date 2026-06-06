@@ -29,12 +29,14 @@ async function main() {
 
   const products = [
     // LITERATURA
-    { title: 'Dom Casmurro', description: 'Um clássico do realismo brasileiro.', authors: ['Machado de Assis'], genres: ['Literatura'], price: 39.90, stock: 50 },
-    { title: 'A Metamorfose', description: 'A história de Gregor Samsa.', authors: ['Franz Kafka'], genres: ['Literatura'], price: 34.90, stock: 40 },
-    { title: 'O Alienista', description: 'A loucura e a razão em Itaguaí.', authors: ['Machado de Assis'], genres: ['Literatura'], price: 29.90, stock: 45 },
-    { title: '1984', description: 'Distopia sobre vigilância governamental.', authors: ['George Orwell'], genres: ['Literatura'], price: 44.90, stock: 60 },
-    { title: 'O Pequeno Príncipe', description: 'Uma história atemporal sobre a vida.', authors: ['Antoine de Saint-Exupéry'], genres: ['Literatura'], price: 25.00, stock: 70 },
-    { title: 'Cem Anos de Solidão', description: 'A saga da família Buendía.', authors: ['Gabriel García Márquez'], genres: ['Literatura'], price: 54.90, stock: 35 },
+    { title: 'Dom Casmurro', description: 'Um clássico do realismo brasileiro que explora o ciúme e a dúvida sobre Capitu.', authors: ['Machado de Assis'], genres: ['Literatura'], price: 39.90, stock: 50 },
+    { title: 'A Metamorfose', description: 'A célebre história de Gregor Samsa, que acorda metamorfoseado em um inseto monstruoso.', authors: ['Franz Kafka'], genres: ['Literatura'], price: 34.90, stock: 40 },
+    { title: 'A Cartomante', description: 'Um dos contos mais famosos de Machado de Assis que explora triângulos amorosos e o destino.', authors: ['Machado de Assis'], genres: ['Literatura'], price: 24.90, stock: 45 },
+    { title: 'Anna Karenina', description: 'Um dos maiores romances da literatura mundial, retratando o trágico amor de Anna.', authors: ['Liev Tolstói'], genres: ['Literatura'], price: 54.90, stock: 30 },
+    { title: 'A Morte de Ivan Ilitch', description: 'Uma reflexão profunda sobre a vida, a morte e o sentido da existência humana.', authors: ['Liev Tolstói'], genres: ['Literatura'], price: 29.90, stock: 35 },
+    { title: 'Memórias Póstumas de Brás Cubas', description: 'A inovadora narrativa de um defunto autor que analisa sua própria vida com ironia.', authors: ['Machado de Assis'], genres: ['Literatura'], price: 35.90, stock: 40 },
+    { title: 'O Processo', description: 'O pesadelo burocrático de Josef K., preso sem saber de qual crime é acusado.', authors: ['Franz Kafka'], genres: ['Literatura'], price: 38.00, stock: 25 },
+    { title: 'O Pequeno Príncipe', description: 'Uma história atemporal sobre a infância, o amor e a amizade.', authors: ['Antoine de Saint-Exupéry'], genres: ['Literatura'], price: 25.00, stock: 70 },
 
     // ROMANCE
     { title: 'Orgulho e Preconceito', description: 'O romance clássico de Elizabeth Bennet.', authors: ['Jane Austen'], genres: ['Romance'], price: 35.90, stock: 40 },

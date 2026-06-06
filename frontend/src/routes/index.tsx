@@ -6,6 +6,7 @@ import { PrivateLayout } from "../layouts/privateLayout";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { Register } from "../pages/Register";
+import { BookDetails } from "../pages/BookDetails";
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/auth/login", element: <Login /> },
       { path: "/auth/register", element: <Register /> },
+      { path: "/book/:id", element: <BookDetails /> },
     ],
   },
 

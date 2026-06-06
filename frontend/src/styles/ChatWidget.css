@@ -377,3 +377,117 @@
   0%, 80%, 100% { transform: scale(0); }
   40% { transform: scale(1.0); }
 }
+
+@media (max-width: 768px) {
+  .chat-float-trigger {
+    bottom: 95px; /* positioned above the bottom cart bar (72px) */
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+  
+  .chat-mini-modal {
+    bottom: 160px; /* positioned above the trigger button */
+    right: 15px;
+    width: calc(100vw - 30px);
+    max-width: 360px;
+    height: 460px;
+  }
+}
+
+/* Chatbook suggestion cards */
+.chat-mentioned-books {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 8px 0;
+  margin-top: 6px;
+  max-width: 100%;
+  scrollbar-width: none;
+}
+
+.chat-mentioned-books::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-book-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 140px;
+  max-width: 180px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.chat-book-card:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.chat-book-cover {
+  width: 30px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.chat-book-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-book-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f3f4f6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-book-author {
+  font-size: 9px;
+  color: #9ca3af;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-color-scheme: light) {
+  .chat-book-card {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+  
+  .chat-book-card:hover {
+    background: #e2e8f0;
+  }
+  
+  .chat-book-title {
+    color: #0f172a;
+  }
+  
+  .chat-book-author {
+    color: #475569;
+  }
+}
+
+.chat-mentioned-books.draggable {
+  cursor: grab;
+  user-select: none;
+}
+
+.chat-mentioned-books.draggable:active {
+  cursor: grabbing;
+}

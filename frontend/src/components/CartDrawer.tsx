@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/cart.css";
 import { useCart } from "../context/CartContext";
+import { getBookCoverImage } from "../services/api";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -30,7 +31,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose }) => {
           ) : (
             items.map(item => (
               <div className="cart-item" key={item.id}>
-                <div className="cart-item-icon">🛒</div>
+                {(() => {
+                  const cover = getBookCoverImage(item.title);
+                  return cover ? (
+                    <div className="cart-item-cover-wrapper">
+                      <img src={cover} alt={item.title} className="cart-item-cover-img" />
+                    </div>
+                  ) : (
+                    <div className="cart-item-icon">🛒</div>
+                  );
+                })()}
                 <div className="cart-item-info">
                   <div className="cart-item-name">{item.title}</div>
                   <div className="cart-item-price">R$ {item.price.toFixed(2).replace('.', ',')}</div>
