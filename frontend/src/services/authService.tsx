@@ -1,4 +1,9 @@
-const API_URL = "http://localhost:3001/api/auth";
+let BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+BASE_URL = BASE_URL.replace(/\/+$/, '');
+if (!BASE_URL.endsWith('/api')) {
+  BASE_URL = `${BASE_URL}/api`;
+}
+const API_URL = `${BASE_URL}/auth`;
 
 type AuthResponse = {
   user: {
