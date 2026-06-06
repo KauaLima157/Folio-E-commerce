@@ -1,4 +1,8 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+let API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+API_BASE_URL = API_BASE_URL.replace(/\/+$/, '');
+if (!API_BASE_URL.endsWith('/api')) {
+  API_BASE_URL = `${API_BASE_URL}/api`;
+}
 
 export interface Product {
   id: string;
