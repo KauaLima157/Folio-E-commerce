@@ -37,9 +37,10 @@ const GenreSection = ({ title, id, offset }: { title: string, id: string, offset
   }, [title, offset]);
   
   const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [hasMoved, setHasMoved] = useState(false);
+  
+  const isDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
 
   const scroll = (direction: 'left' | 'right') => {
     if (rowRef.current) {
@@ -51,54 +52,60 @@ const GenreSection = ({ title, id, offset }: { title: string, id: string, offset
     }
   };
 
-  const handleMouseDown = (e: React.MouseEvent) => {
+  const handlePointerDown = (e: React.PointerEvent) => {
     dragStartXRef.current = e.pageX;
     dragStartYRef.current = e.pageY;
-    setStartX(e.pageX - (rowRef.current?.offsetLeft || 0));
-    setScrollLeft(rowRef.current?.scrollLeft || 0);
-    setHasMoved(false);
+
+    if (e.pointerType !== 'mouse') return;
+    if (e.button !== 0) return;
+
+    isDownRef.current = true;
+    startXRef.current = e.pageX - (rowRef.current?.offsetLeft || 0);
+    scrollLeftRef.current = rowRef.current?.scrollLeft || 0;
   };
 
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-    setHasMoved(false);
-  };
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isDownRef.current || !rowRef.current) return;
+    if (e.pointerType !== 'mouse') return;
 
-  const handleMouseUp = (e: React.MouseEvent) => {
-    if (hasMoved) {
-      e.preventDefault();
+    const x = e.pageX - rowRef.current.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5;
+
+    if (Math.abs(x - startXRef.current) > 5) {
+      setIsDragging(true);
+      rowRef.current.scrollLeft = scrollLeftRef.current - walk;
     }
-    // Delay resetting so navigation can proceed if it was a click
+  };
+
+  const handlePointerUp = () => {
+    if (!isDownRef.current) return;
+    isDownRef.current = false;
+
     setTimeout(() => {
       setIsDragging(false);
-      setHasMoved(false);
     }, 50);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!rowRef.current) return;
-    const x = e.pageX - rowRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    
-    // Only drag if the mouse moved more than 5px
-    if (Math.abs(x - startX) > 5) {
-      setIsDragging(true);
-      setHasMoved(true);
-      e.preventDefault();
-      rowRef.current.scrollLeft = scrollLeft - walk;
+  const handlePointerCancel = () => {
+    isDownRef.current = false;
+    setIsDragging(false);
+  };
+
+  const handlePointerLeave = (e: React.PointerEvent) => {
+    if (e.pointerType === 'mouse') {
+      isDownRef.current = false;
+      setIsDragging(false);
     }
   };
 
   const handleCardClick = (e: React.MouseEvent, bookId: string) => {
     const distanceX = Math.abs(e.pageX - dragStartXRef.current);
     const distanceY = Math.abs(e.pageY - dragStartYRef.current);
-    
-    // If user dragged more than 8 pixels, prevent navigation
+
     if (distanceX > 8 || distanceY > 8) {
       e.preventDefault();
       return;
     }
-    
     navigate(`/book/${bookId}`);
   };
 
@@ -116,10 +123,11 @@ const GenreSection = ({ title, id, offset }: { title: string, id: string, offset
       <div 
         className="books-row" 
         ref={rowRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onMouseMove={handleMouseMove}
+        onPointerDown={handlePointerDown}
+        onPointerLeave={handlePointerLeave}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+        onPointerMove={handlePointerMove}
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
       >
         {books.map(book => (
